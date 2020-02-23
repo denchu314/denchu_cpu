@@ -1,0 +1,49 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Sat Mar 16 10:22:16 2019
+[*]
+[dumpfile] "/home/daichi/modakio/hardware/cpu/decoder/main.vcd"
+[dumpfile_mtime] "Sat Mar 16 10:19:44 2019"
+[dumpfile_size] 11761
+[savefile] "/home/daichi/modakio/hardware/cpu/decoder/gtkwave.gtkw"
+[timestart] 38800
+[size] 1280 657
+[pos] -113 -90
+*-16.000000 150000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[sst_width] 210
+[signals_width] 225
+[sst_expanded] 1
+[sst_vpaned_height] 174
+@28
+main.uDecoder.rst
+main.uDecoder.clk
+@22
+main.uDecoder.i_inst[31:0]
+@28
+main.uDecoder.i_inst_valid
+main.uDecoder.o_type[1:0]
+@22
+main.uDecoder.o_op[3:0]
+main.uDecoder.o_dst[4:0]
+main.uDecoder.o_src0[4:0]
+main.uDecoder.o_src1[4:0]
+@28
+main.uDecoder.o_jr
+@22
+main.uDecoder.o_j_addr[31:0]
+@28
+main.uDecoder.o_j_addr_valid
+@22
+main.uDecoder.o_jal_addr[31:0]
+@28
+main.uDecoder.o_jal_addr_valid
+@22
+main.uDecoder.o_minor_imm[15:0]
+@28
+main.uDecoder.o_read_req
+main.uDecoder.o_write_req
+@23
+main.uDecoder.w_major_imm[25:0]
+[pattern_trace] 1
+[pattern_trace] 0

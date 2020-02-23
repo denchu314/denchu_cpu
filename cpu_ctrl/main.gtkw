@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Mon Apr 29 10:56:51 2019
+[*]
+[dumpfile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/cpu_ctrl/main.vcd"
+[dumpfile_mtime] "Mon Apr 29 10:00:18 2019"
+[dumpfile_size] 23860
+[savefile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/cpu_ctrl/main.gtkw"
+[timestart] 17600
+[size] 1280 657
+[pos] -113 -90
+*-13.000000 35620 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[sst_width] 210
+[signals_width] 198
+[sst_expanded] 1
+[sst_vpaned_height] 223
+@28
+main.uCpu_ctrl.rst
+main.uCpu_ctrl.clk
+main.uCpu_ctrl.o_inst_complete
+main.uCpu_ctrl.i_empty
+@22
+main.uCpu_ctrl.i_inst[31:0]
+@28
+main.uCpu_ctrl.i_inst_valid
+main.uCpu_ctrl.i_write_mem_complete
+main.uCpu_ctrl.i_read_mem_complete
+main.uCpu_ctrl.o_calc_start
+main.uCpu_ctrl.i_calc_complete
+main.uCpu_ctrl.i_addr[1:0]
+main.uCpu_ctrl.i_read
+main.uCpu_ctrl.i_write
+@22
+main.uCpu_ctrl.i_writedata[31:0]
+main.uCpu_ctrl.o_readdata[31:0]
+@28
+main.uCpu_ctrl.o_readdatavalid
+@22
+main.uCpu_ctrl.r_state[3:0]
+@28
+main.uCpu_ctrl.w_waitToFetch_to_calc
+@29
+main.uCpu_ctrl.i_empty
+[pattern_trace] 1
+[pattern_trace] 0

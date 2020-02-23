@@ -1,0 +1,129 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x2524d30 .scope module, "main" "main" 2 6;
+ .timescale -9 -9;
+P_0x2535098 .param/l "CYCLE" 2 16, +C4<01111101000>;
+v0x255f660_0 .net *"_s10", 3 0, C4<0000>; 1 drivers
+v0x255f8b0_0 .net *"_s2", 29 0, L_0x25607b0; 1 drivers
+v0x255f950_0 .net *"_s4", 1 0, C4<00>; 1 drivers
+v0x255f9f0_0 .net *"_s8", 27 0, L_0x2560a50; 1 drivers
+v0x255fa70_0 .var "a", 31 0;
+v0x255fb20_0 .var "clk", 0 0;
+v0x255fba0_0 .var "rst", 0 0;
+v0x255fc50_0 .var "valid0", 0 0;
+v0x255fd00_0 .var "valid1", 0 0;
+v0x255fdb0_0 .var "valid2", 0 0;
+E_0x2534fe0 .event posedge, v0x255f080_0;
+L_0x25607b0 .part v0x255fa70_0, 0, 30;
+L_0x25608c0 .concat [ 2 30 0 0], C4<00>, L_0x25607b0;
+L_0x2560a50 .part v0x255fa70_0, 0, 28;
+L_0x2560c00 .concat [ 4 28 0 0], C4<0000>, L_0x2560a50;
+S_0x25246b0 .scope module, "uArb" "mArb" 2 64, 3 9, S_0x2524d30;
+ .timescale -9 -9;
+L_0x255fe90 .functor XNOR 1, v0x255fc50_0, C4<1>, C4<0>, C4<0>;
+L_0x255ffb0 .functor XNOR 1, v0x255fd00_0, C4<1>, C4<0>, C4<0>;
+L_0x25600f0 .functor XNOR 1, v0x255fdb0_0, C4<1>, C4<0>, C4<0>;
+L_0x25606a0 .functor OR 1, v0x255fc50_0, v0x255fd00_0, C4<0>, C4<0>;
+L_0x2560700 .functor OR 1, L_0x25606a0, v0x255fdb0_0, C4<0>, C4<0>;
+v0x2536cf0_0 .net *"_s0", 0 0, C4<1>; 1 drivers
+v0x255e9e0_0 .net *"_s10", 0 0, L_0x25600f0; 1 drivers
+v0x255ea80_0 .net *"_s12", 31 0, C4<00000000000000000000000000000000>; 1 drivers
+v0x255eb20_0 .net *"_s14", 31 0, L_0x2560260; 1 drivers
+v0x255ebd0_0 .net *"_s16", 31 0, L_0x25603d0; 1 drivers
+v0x255ec70_0 .net *"_s2", 0 0, L_0x255fe90; 1 drivers
+v0x255ed50_0 .net *"_s20", 0 0, L_0x25606a0; 1 drivers
+v0x255edf0_0 .net *"_s4", 0 0, C4<1>; 1 drivers
+v0x255eee0_0 .net *"_s6", 0 0, L_0x255ffb0; 1 drivers
+v0x255ef80_0 .net *"_s8", 0 0, C4<1>; 1 drivers
+v0x255f080_0 .net "clk", 0 0, v0x255fb20_0; 1 drivers
+v0x255f120_0 .net "iSnk0Data", 31 0, v0x255fa70_0; 1 drivers
+v0x255f230_0 .net "iSnk0Valid", 0 0, v0x255fc50_0; 1 drivers
+v0x255f2d0_0 .net "iSnk1Data", 31 0, L_0x25608c0; 1 drivers
+v0x255f3f0_0 .net "iSnk1Valid", 0 0, v0x255fd00_0; 1 drivers
+v0x255f490_0 .net "iSnk2Data", 31 0, L_0x2560c00; 1 drivers
+v0x255f350_0 .net "iSnk2Valid", 0 0, v0x255fdb0_0; 1 drivers
+v0x255f5e0_0 .net "oSrc0Data", 31 0, L_0x2560510; 1 drivers
+v0x255f700_0 .net "oSrc0Valid", 0 0, L_0x2560700; 1 drivers
+v0x255f780_0 .net "rst", 0 0, v0x255fba0_0; 1 drivers
+L_0x2560260 .functor MUXZ 32, C4<00000000000000000000000000000000>, L_0x2560c00, L_0x25600f0, C4<>;
+L_0x25603d0 .functor MUXZ 32, L_0x2560260, L_0x25608c0, L_0x255ffb0, C4<>;
+L_0x2560510 .functor MUXZ 32, L_0x25603d0, v0x255fa70_0, L_0x255fe90, C4<>;
+    .scope S_0x2524d30;
+T_0 ;
+    %set/v v0x255fba0_0, 1, 1;
+    %delay 4000, 0;
+    %set/v v0x255fba0_0, 0, 1;
+    %end;
+    .thread T_0;
+    .scope S_0x2524d30;
+T_1 ;
+    %set/v v0x255fb20_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x2524d30;
+T_2 ;
+    %delay 500, 0;
+    %load/v 8, v0x255fb20_0, 1;
+    %inv 8, 1;
+    %set/v v0x255fb20_0, 8, 1;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x2524d30;
+T_3 ;
+    %set/v v0x255fa70_0, 0, 32;
+    %end;
+    .thread T_3;
+    .scope S_0x2524d30;
+T_4 ;
+    %wait E_0x2534fe0;
+    %load/v 8, v0x255fa70_0, 32;
+    %mov 40, 0, 1;
+    %addi 8, 1, 33;
+    %set/v v0x255fa70_0, 8, 32;
+    %jmp T_4;
+    .thread T_4;
+    .scope S_0x2524d30;
+T_5 ;
+    %vpi_call 2 43 "$dumpfile", "main.vcd";
+    %vpi_call 2 44 "$dumpvars", 1'sb0, S_0x2524d30;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fc50_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fd00_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fdb0_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fc50_0, 0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fd00_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fdb0_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fc50_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fd00_0, 0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fdb0_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fc50_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fd00_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x255fdb0_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 61 "$finish";
+    %end;
+    .thread T_5;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "main.v";
+    "mArb.v";

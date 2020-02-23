@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="30" />
+   <irq preferredWidth="34" />
+   <name preferredWidth="347" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library/Memory Interfaces and Controllers/Memory Interfaces with UniPHY,Library/Processors and Peripherals,Library/Basic Functions,Library/Qsys Interconnect/Memory-Mapped,Project,Library/Qsys Interconnect/Memory-Mapped Alpha,Library/Qsys Interconnect,Library/Processors and Peripherals/Hard Processor Components,Library/Basic Functions/Bridges and Adaptors,Library/Memory Interfaces and Controllers,Library/Memory Interfaces and Controllers/Memory Interfaces with ALTMEMPHY,Library/Memory Interfaces and Controllers/SDRAM,Library/Memory Interfaces and Controllers/Flash,Library/Basic Functions/On Chip Memory,Library/Basic Functions/Simulation; Debug and Verification/Simulation,Library/University Program/Memory,Library/University Program,Library/Basic Functions/Bridges and Adaptors/Memory Mapped,Library,Library/Basic Functions/Simulation; Debug and Verification" />
+ <window width="2560" height="1360" x="0" y="0" />
+ <generation path="C:/Users/moe/Documents/project/2-port-mem" />
+</preferences>

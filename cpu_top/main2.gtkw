@@ -1,0 +1,66 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Thu May  2 08:36:25 2019
+[*]
+[dumpfile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/cpu_top/main.vcd"
+[dumpfile_mtime] "Thu May  2 08:35:59 2019"
+[dumpfile_size] 31812
+[savefile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/cpu_top/main2.gtkw"
+[timestart] 12070
+[size] 1280 657
+[pos] -35 -35
+*-12.000000 30060 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[treeopen] main.uCpu_top.
+[sst_width] 210
+[signals_width] 330
+[sst_expanded] 1
+[sst_vpaned_height] 285
+@28
+main.uCpu_top.rst
+main.uCpu_top.clk
+@22
+main.uCpu_top.i_data_readdata[31:0]
+@28
+main.uCpu_top.i_data_readdatavalid
+main.uCpu_top.i_data_waitrequest
+@22
+main.uCpu_top.o_data_addr[17:0]
+@28
+main.uCpu_top.o_data_read
+main.uCpu_top.o_data_write
+@22
+main.uCpu_top.o_data_writedata[31:0]
+main.uCpu_top.i_inst_readdata[31:0]
+@28
+main.uCpu_top.i_inst_readdatavalid
+main.uCpu_top.i_inst_waitrequest
+@22
+main.uCpu_top.o_inst_addr[17:0]
+main.uCpu_top.o_inst_burstcount[31:0]
+@28
+main.uCpu_top.o_inst_read
+main.uCpu_top.i_status_addr[1:0]
+main.uCpu_top.i_status_read
+main.uCpu_top.i_status_write
+@22
+main.uCpu_top.i_status_writedata[31:0]
+main.uCpu_top.o_status_readdata[31:0]
+@28
+main.uCpu_top.o_status_readdatavalid
+@22
+main.uCpu_top.uInst_fetch_ctrl.o_inst[31:0]
+@28
+main.uCpu_top.uInst_fetch_ctrl.o_inst_valid
+@22
+main.uCpu_top.uInst_fetch_ctrl.r_inst_counter[17:0]
+@28
+main.uCpu_top.uInst_fetch_ctrl.o_fetch_complete
+@22
+main.uCpu_top.uFifo.o_src_data[31:0]
+@28
+main.uCpu_top.uFifo.o_src_valid
+@29
+main.uCpu_top.uFifo.w_ptr[2:0]
+[pattern_trace] 1
+[pattern_trace] 0

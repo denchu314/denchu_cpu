@@ -1,0 +1,216 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2016  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 480 528)
+	(text "memory" (rect 217 -1 252 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 512 20 524)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "onchip_memory2_0_clk1_clk" (rect 0 0 118 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_clk1_clk" (rect 4 61 154 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 208 72)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "onchip_memory2_0_clk2_clk" (rect 0 0 119 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_clk2_clk" (rect 4 101 154 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 208 112)(line_width 1))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "onchip_memory2_0_reset1_reset" (rect 0 0 136 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_reset1_reset" (rect 4 141 178 152)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 208 152)(line_width 1))
+	)
+	(port
+		(pt 0 168)
+		(input)
+		(text "onchip_memory2_0_reset1_reset_req" (rect 0 0 155 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_reset1_reset_req" (rect 4 157 202 168)(font "Arial" (font_size 8)))
+		(line (pt 0 168)(pt 208 168)(line_width 1))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "onchip_memory2_0_reset2_reset" (rect 0 0 138 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_reset2_reset" (rect 4 197 178 208)(font "Arial" (font_size 8)))
+		(line (pt 0 208)(pt 208 208)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "onchip_memory2_0_reset2_reset_req" (rect 0 0 156 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_reset2_reset_req" (rect 4 213 202 224)(font "Arial" (font_size 8)))
+		(line (pt 0 224)(pt 208 224)(line_width 1))
+	)
+	(port
+		(pt 0 264)
+		(input)
+		(text "onchip_memory2_0_s1_address[9..0]" (rect 0 0 153 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_address[9..0]" (rect 4 253 202 264)(font "Arial" (font_size 8)))
+		(line (pt 0 264)(pt 208 264)(line_width 3))
+	)
+	(port
+		(pt 0 280)
+		(input)
+		(text "onchip_memory2_0_s1_clken" (rect 0 0 121 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_clken" (rect 4 269 154 280)(font "Arial" (font_size 8)))
+		(line (pt 0 280)(pt 208 280)(line_width 1))
+	)
+	(port
+		(pt 0 296)
+		(input)
+		(text "onchip_memory2_0_s1_chipselect" (rect 0 0 139 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_chipselect" (rect 4 285 184 296)(font "Arial" (font_size 8)))
+		(line (pt 0 296)(pt 208 296)(line_width 1))
+	)
+	(port
+		(pt 0 312)
+		(input)
+		(text "onchip_memory2_0_s1_write" (rect 0 0 119 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_write" (rect 4 301 154 312)(font "Arial" (font_size 8)))
+		(line (pt 0 312)(pt 208 312)(line_width 1))
+	)
+	(port
+		(pt 0 344)
+		(input)
+		(text "onchip_memory2_0_s1_writedata[31..0]" (rect 0 0 159 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_writedata[31..0]" (rect 4 333 220 344)(font "Arial" (font_size 8)))
+		(line (pt 0 344)(pt 208 344)(line_width 3))
+	)
+	(port
+		(pt 0 360)
+		(input)
+		(text "onchip_memory2_0_s1_byteenable[3..0]" (rect 0 0 164 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_byteenable[3..0]" (rect 4 349 220 360)(font "Arial" (font_size 8)))
+		(line (pt 0 360)(pt 208 360)(line_width 3))
+	)
+	(port
+		(pt 0 400)
+		(input)
+		(text "onchip_memory2_0_s2_address[9..0]" (rect 0 0 154 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_address[9..0]" (rect 4 389 202 400)(font "Arial" (font_size 8)))
+		(line (pt 0 400)(pt 208 400)(line_width 3))
+	)
+	(port
+		(pt 0 416)
+		(input)
+		(text "onchip_memory2_0_s2_chipselect" (rect 0 0 140 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_chipselect" (rect 4 405 184 416)(font "Arial" (font_size 8)))
+		(line (pt 0 416)(pt 208 416)(line_width 1))
+	)
+	(port
+		(pt 0 432)
+		(input)
+		(text "onchip_memory2_0_s2_clken" (rect 0 0 122 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_clken" (rect 4 421 154 432)(font "Arial" (font_size 8)))
+		(line (pt 0 432)(pt 208 432)(line_width 1))
+	)
+	(port
+		(pt 0 448)
+		(input)
+		(text "onchip_memory2_0_s2_write" (rect 0 0 120 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_write" (rect 4 437 154 448)(font "Arial" (font_size 8)))
+		(line (pt 0 448)(pt 208 448)(line_width 1))
+	)
+	(port
+		(pt 0 480)
+		(input)
+		(text "onchip_memory2_0_s2_writedata[31..0]" (rect 0 0 160 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_writedata[31..0]" (rect 4 469 220 480)(font "Arial" (font_size 8)))
+		(line (pt 0 480)(pt 208 480)(line_width 3))
+	)
+	(port
+		(pt 0 496)
+		(input)
+		(text "onchip_memory2_0_s2_byteenable[3..0]" (rect 0 0 165 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_byteenable[3..0]" (rect 4 485 220 496)(font "Arial" (font_size 8)))
+		(line (pt 0 496)(pt 208 496)(line_width 3))
+	)
+	(port
+		(pt 0 328)
+		(output)
+		(text "onchip_memory2_0_s1_readdata[31..0]" (rect 0 0 159 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s1_readdata[31..0]" (rect 4 317 214 328)(font "Arial" (font_size 8)))
+		(line (pt 0 328)(pt 208 328)(line_width 3))
+	)
+	(port
+		(pt 0 464)
+		(output)
+		(text "onchip_memory2_0_s2_readdata[31..0]" (rect 0 0 160 12)(font "Arial" (font_size 8)))
+		(text "onchip_memory2_0_s2_readdata[31..0]" (rect 4 453 214 464)(font "Arial" (font_size 8)))
+		(line (pt 0 464)(pt 208 464)(line_width 3))
+	)
+	(drawing
+		(text "onchip_memory2_0_clk1" (rect 66 43 258 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 213 67 444 144)(font "Arial" (color 0 0 0)))
+		(text "onchip_memory2_0_clk2" (rect 64 83 254 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 213 107 444 224)(font "Arial" (color 0 0 0)))
+		(text "onchip_memory2_0_reset1" (rect 52 123 242 259)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset" (rect 213 147 456 304)(font "Arial" (color 0 0 0)))
+		(text "reset_req" (rect 213 163 480 336)(font "Arial" (color 0 0 0)))
+		(text "onchip_memory2_0_reset2" (rect 50 179 238 371)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset" (rect 213 203 456 416)(font "Arial" (color 0 0 0)))
+		(text "reset_req" (rect 213 219 480 448)(font "Arial" (color 0 0 0)))
+		(text "onchip_memory2_0_s1" (rect 75 235 264 483)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "address" (rect 213 259 468 528)(font "Arial" (color 0 0 0)))
+		(text "clken" (rect 213 275 456 560)(font "Arial" (color 0 0 0)))
+		(text "chipselect" (rect 213 291 486 592)(font "Arial" (color 0 0 0)))
+		(text "write" (rect 213 307 456 624)(font "Arial" (color 0 0 0)))
+		(text "readdata" (rect 213 323 474 656)(font "Arial" (color 0 0 0)))
+		(text "writedata" (rect 213 339 480 688)(font "Arial" (color 0 0 0)))
+		(text "byteenable" (rect 213 355 486 720)(font "Arial" (color 0 0 0)))
+		(text "onchip_memory2_0_s2" (rect 73 371 260 755)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "address" (rect 213 395 468 800)(font "Arial" (color 0 0 0)))
+		(text "chipselect" (rect 213 411 486 832)(font "Arial" (color 0 0 0)))
+		(text "clken" (rect 213 427 456 864)(font "Arial" (color 0 0 0)))
+		(text "write" (rect 213 443 456 896)(font "Arial" (color 0 0 0)))
+		(text "readdata" (rect 213 459 474 928)(font "Arial" (color 0 0 0)))
+		(text "writedata" (rect 213 475 480 960)(font "Arial" (color 0 0 0)))
+		(text "byteenable" (rect 213 491 486 992)(font "Arial" (color 0 0 0)))
+		(text " memory " (rect 441 512 930 1034)(font "Arial" ))
+		(line (pt 208 32)(pt 272 32)(line_width 1))
+		(line (pt 272 32)(pt 272 512)(line_width 1))
+		(line (pt 208 512)(pt 272 512)(line_width 1))
+		(line (pt 208 32)(pt 208 512)(line_width 1))
+		(line (pt 209 52)(pt 209 76)(line_width 1))
+		(line (pt 210 52)(pt 210 76)(line_width 1))
+		(line (pt 209 92)(pt 209 116)(line_width 1))
+		(line (pt 210 92)(pt 210 116)(line_width 1))
+		(line (pt 209 132)(pt 209 172)(line_width 1))
+		(line (pt 210 132)(pt 210 172)(line_width 1))
+		(line (pt 209 188)(pt 209 228)(line_width 1))
+		(line (pt 210 188)(pt 210 228)(line_width 1))
+		(line (pt 209 244)(pt 209 364)(line_width 1))
+		(line (pt 210 244)(pt 210 364)(line_width 1))
+		(line (pt 209 380)(pt 209 500)(line_width 1))
+		(line (pt 210 380)(pt 210 500)(line_width 1))
+		(line (pt 0 0)(pt 480 0)(line_width 1))
+		(line (pt 480 0)(pt 480 528)(line_width 1))
+		(line (pt 0 528)(pt 480 528)(line_width 1))
+		(line (pt 0 0)(pt 0 528)(line_width 1))
+	)
+)

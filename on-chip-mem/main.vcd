@@ -1,0 +1,668 @@
+$date
+	Sun Apr 28 03:16:29 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module main $end
+$var reg 10 ! addr [9:0] $end
+$var reg 1 " clk $end
+$var reg 32 # data [31:0] $end
+$var reg 1 $ rst $end
+$var reg 1 % valid $end
+$scope module uMemory $end
+$var wire 1 & onchip_memory2_0_clk1_clk $end
+$var wire 1 & onchip_memory2_0_clk2_clk $end
+$var wire 1 ' onchip_memory2_0_reset1_reset $end
+$var wire 1 ( onchip_memory2_0_reset1_reset_req $end
+$var wire 1 ' onchip_memory2_0_reset2_reset $end
+$var wire 1 ) onchip_memory2_0_reset2_reset_req $end
+$var wire 10 * onchip_memory2_0_s1_address [9:0] $end
+$var wire 4 + onchip_memory2_0_s1_byteenable [3:0] $end
+$var wire 1 , onchip_memory2_0_s1_chipselect $end
+$var wire 1 - onchip_memory2_0_s1_clken $end
+$var wire 32 . onchip_memory2_0_s1_readdata [31:0] $end
+$var wire 1 , onchip_memory2_0_s1_write $end
+$var wire 32 / onchip_memory2_0_s1_writedata [31:0] $end
+$var wire 10 0 onchip_memory2_0_s2_address [9:0] $end
+$var wire 4 1 onchip_memory2_0_s2_byteenable [3:0] $end
+$var wire 1 , onchip_memory2_0_s2_chipselect $end
+$var wire 1 2 onchip_memory2_0_s2_clken $end
+$var wire 32 3 onchip_memory2_0_s2_readdata [31:0] $end
+$var wire 1 , onchip_memory2_0_s2_write $end
+$var wire 32 4 onchip_memory2_0_s2_writedata [31:0] $end
+$scope module onchip_memory2_0 $end
+$var wire 10 5 address [9:0] $end
+$var wire 10 6 address2 [9:0] $end
+$var wire 4 7 byteenable [3:0] $end
+$var wire 4 8 byteenable2 [3:0] $end
+$var wire 1 , chipselect $end
+$var wire 1 , chipselect2 $end
+$var wire 1 & clk $end
+$var wire 1 & clk2 $end
+$var wire 1 - clken $end
+$var wire 1 2 clken2 $end
+$var wire 1 9 clocken0 $end
+$var wire 1 : clocken1 $end
+$var wire 1 ; freeze $end
+$var wire 32 < readdata [31:0] $end
+$var wire 32 = readdata2 [31:0] $end
+$var wire 1 ' reset $end
+$var wire 1 ' reset2 $end
+$var wire 1 ( reset_req $end
+$var wire 1 ) reset_req2 $end
+$var wire 1 > wren $end
+$var wire 1 ? wren2 $end
+$var wire 1 , write $end
+$var wire 1 , write2 $end
+$var wire 32 @ writedata [31:0] $end
+$var wire 32 A writedata2 [31:0] $end
+$scope module the_altsyncram $end
+$var wire 1 B aclr0 $end
+$var wire 1 C aclr1 $end
+$var wire 10 D address_a [9:0] $end
+$var wire 10 E address_b [9:0] $end
+$var wire 1 F addressstall_a $end
+$var wire 1 G addressstall_b $end
+$var wire 4 H byteena_a [3:0] $end
+$var wire 4 I byteena_b [3:0] $end
+$var wire 1 & clock0 $end
+$var wire 1 & clock1 $end
+$var wire 1 9 clocken0 $end
+$var wire 1 : clocken1 $end
+$var wire 1 J clocken2 $end
+$var wire 1 K clocken3 $end
+$var wire 32 L data_a [31:0] $end
+$var wire 32 M data_b [31:0] $end
+$var wire 3 N eccstatus [2:0] $end
+$var wire 32 O q_a [31:0] $end
+$var wire 32 P q_b [31:0] $end
+$var wire 1 Q rden_a $end
+$var wire 1 R rden_b $end
+$var wire 1 > wren_a $end
+$var wire 1 ? wren_b $end
+$scope begin m_default $end
+$scope module altsyncram_inst $end
+$var wire 1 B aclr0 $end
+$var wire 1 C aclr1 $end
+$var wire 10 S address_a [9:0] $end
+$var wire 10 T address_b [9:0] $end
+$var wire 1 F addressstall_a $end
+$var wire 1 G addressstall_b $end
+$var wire 4 U byteena_a [3:0] $end
+$var wire 4 V byteena_b [3:0] $end
+$var wire 1 & clock0 $end
+$var wire 1 & clock1 $end
+$var wire 1 9 clocken0 $end
+$var wire 1 : clocken1 $end
+$var wire 1 J clocken2 $end
+$var wire 1 K clocken3 $end
+$var wire 32 W data_a [31:0] $end
+$var wire 32 X data_b [31:0] $end
+$var wire 3 Y eccstatus [2:0] $end
+$var wire 1 Z i_address_aclr_a $end
+$var wire 1 [ i_address_aclr_b $end
+$var wire 1 \ i_byteena_a $end
+$var wire 1 ] i_byteena_aclr_a $end
+$var wire 1 ^ i_byteena_aclr_b $end
+$var wire 1 _ i_byteena_b $end
+$var wire 1 ` i_clocken0 $end
+$var wire 1 a i_clocken0_b $end
+$var wire 1 b i_clocken1_b $end
+$var wire 1 c i_core_clocken0_b $end
+$var wire 1 d i_core_clocken1_b $end
+$var wire 1 e i_core_clocken_a $end
+$var wire 1 f i_core_clocken_b $end
+$var wire 1 g i_good_to_write_a $end
+$var wire 1 h i_good_to_write_b $end
+$var wire 1 i i_indata_aclr_a $end
+$var wire 1 j i_indata_aclr_b $end
+$var wire 1 k i_outdata_aclr_a $end
+$var wire 1 l i_outdata_aclr_b $end
+$var wire 1 m i_outdata_clken_a $end
+$var wire 1 n i_outdata_clken_b $end
+$var wire 1 o i_outlatch_clken_a $end
+$var wire 1 p i_outlatch_clken_b $end
+$var wire 1 q i_rdcontrol_aclr_b $end
+$var wire 1 r i_wrcontrol_aclr_a $end
+$var wire 1 s i_wrcontrol_aclr_b $end
+$var wire 32 t q_a [31:0] $end
+$var wire 32 u q_b [31:0] $end
+$var wire 1 Q rden_a $end
+$var wire 1 R rden_b $end
+$var wire 1 > wren_a $end
+$var wire 1 ? wren_b $end
+$var reg 169 v cread_during_write_mode_mixed_ports [168:0] $end
+$var reg 1 w good_to_go_a $end
+$var reg 1 x good_to_go_b $end
+$var integer 32 y i [31:0] $end
+$var integer 32 z i2 [31:0] $end
+$var integer 32 { i4 [31:0] $end
+$var integer 32 | i5 [31:0] $end
+$var integer 32 } i_aclr_flag_a [31:0] $end
+$var integer 32 ~ i_aclr_flag_b [31:0] $end
+$var reg 1 !" i_address_aclr_a_flag $end
+$var reg 1 "" i_address_aclr_a_prev $end
+$var reg 1 #" i_address_aclr_b_flag $end
+$var reg 1 $" i_address_aclr_b_prev $end
+$var reg 10 %" i_address_reg_a [9:0] $end
+$var reg 10 &" i_address_reg_b [9:0] $end
+$var integer 32 '" i_byte_size [31:0] $end
+$var integer 32 (" i_byteena_count [31:0] $end
+$var reg 32 )" i_byteena_mask_reg_a [31:0] $end
+$var reg 32 *" i_byteena_mask_reg_a_out [31:0] $end
+$var reg 32 +" i_byteena_mask_reg_a_out_b [31:0] $end
+$var reg 32 ," i_byteena_mask_reg_a_x [31:0] $end
+$var reg 32 -" i_byteena_mask_reg_b [31:0] $end
+$var reg 32 ." i_byteena_mask_reg_b_out [31:0] $end
+$var reg 32 /" i_byteena_mask_reg_b_out_a [31:0] $end
+$var reg 32 0" i_byteena_mask_reg_b_x [31:0] $end
+$var reg 1 1" i_core_clocken0_b_reg $end
+$var reg 1 2" i_core_clocken1_b_reg $end
+$var reg 1 3" i_core_clocken_a_reg $end
+$var reg 32 4" i_data_reg_a [31:0] $end
+$var reg 32 5" i_data_reg_b [31:0] $end
+$var reg 64 6" i_data_write_time_a [63:0] $end
+$var reg 64 7" i_data_write_time_b [63:0] $end
+$var integer 32 8" i_div_wa [31:0] $end
+$var reg 1 9" i_force_reread_a $end
+$var reg 1 :" i_force_reread_a1 $end
+$var reg 1 ;" i_force_reread_a_signal $end
+$var reg 1 <" i_force_reread_b $end
+$var reg 1 =" i_force_reread_b1 $end
+$var reg 1 >" i_force_reread_b_signal $end
+$var reg 1 ?" i_good_to_write_a2 $end
+$var reg 1 @" i_good_to_write_b2 $end
+$var reg 1 A" i_nmram_write_a $end
+$var reg 1 B" i_nmram_write_b $end
+$var integer 32 C" i_numwords_a [31:0] $end
+$var integer 32 D" i_numwords_b [31:0] $end
+$var reg 10 E" i_original_address_a [9:0] $end
+$var reg 32 F" i_original_data_a [31:0] $end
+$var reg 32 G" i_original_data_b [31:0] $end
+$var reg 1 H" i_outdata_aclr_a_prev $end
+$var reg 1 I" i_outdata_aclr_b_prev $end
+$var reg 32 J" i_q_reg_a [31:0] $end
+$var reg 32 K" i_q_reg_b [31:0] $end
+$var reg 32 L" i_q_tmp2_a [31:0] $end
+$var reg 32 M" i_q_tmp2_b [31:0] $end
+$var reg 32 N" i_q_tmp_a [31:0] $end
+$var reg 32 O" i_q_tmp_b [31:0] $end
+$var reg 57 P" i_ram_block_type [56:0] $end
+$var reg 1 Q" i_rden_reg_a $end
+$var reg 1 R" i_rden_reg_b $end
+$var reg 1 S" i_read_flag_a $end
+$var reg 1 T" i_read_flag_b $end
+$var reg 1 U" i_wren_reg_a $end
+$var reg 1 V" i_wren_reg_b $end
+$var reg 1 W" i_write_flag_a $end
+$var reg 1 X" i_write_flag_b $end
+$var reg 1 Y" init_file_b_port $end
+$var integer 32 Z" init_i [31:0] $end
+$var reg 32 [" init_temp [31:0] $end
+$var integer 32 \" k [31:0] $end
+$var integer 32 ]" k2 [31:0] $end
+$var integer 32 ^" port_a_bit_count_high [31:0] $end
+$var integer 32 _" port_a_bit_count_low [31:0] $end
+$var integer 32 `" port_b_bit_count_high [31:0] $end
+$var integer 32 a" port_b_bit_count_low [31:0] $end
+$var reg 2048 b" ram_initf [2048:1] $end
+$var reg 1 c" same_clock_pulse0 $end
+$var reg 1 d" same_clock_pulse1 $end
+$var reg 32 e" temp_wa [31:0] $end
+$var reg 32 f" temp_wb [31:0] $end
+$var reg 32 g" wa_mult_x [31:0] $end
+$var reg 32 h" wa_mult_x_ii [31:0] $end
+$var reg 32 i" wa_mult_x_iii [31:0] $end
+$scope module dev $end
+$scope function FEATURE_FAMILY_ARRIA10 $end
+$var reg 1 j" FEATURE_FAMILY_ARRIA10 $end
+$var reg 160 k" device [160:1] $end
+$var reg 1 l" var_family_arria10 $end
+$upscope $end
+$scope function FEATURE_FAMILY_ARRIAIIGX $end
+$var reg 1 m" FEATURE_FAMILY_ARRIAIIGX $end
+$var reg 160 n" device [160:1] $end
+$var reg 1 o" var_family_arriaiigx $end
+$upscope $end
+$scope function FEATURE_FAMILY_ARRIAIIGZ $end
+$var reg 1 p" FEATURE_FAMILY_ARRIAIIGZ $end
+$var reg 160 q" device [160:1] $end
+$var reg 1 r" var_family_arriaiigz $end
+$upscope $end
+$scope function FEATURE_FAMILY_ARRIAV $end
+$var reg 1 s" FEATURE_FAMILY_ARRIAV $end
+$var reg 160 t" device [160:1] $end
+$var reg 1 u" var_family_arriav $end
+$upscope $end
+$scope function FEATURE_FAMILY_ARRIAVGZ $end
+$var reg 1 v" FEATURE_FAMILY_ARRIAVGZ $end
+$var reg 160 w" device [160:1] $end
+$var reg 1 x" var_family_arriavgz $end
+$upscope $end
+$scope function FEATURE_FAMILY_BASE_CYCLONE $end
+$var reg 1 y" FEATURE_FAMILY_BASE_CYCLONE $end
+$var reg 160 z" device [160:1] $end
+$var reg 1 {" var_family_base_cyclone $end
+$upscope $end
+$scope function FEATURE_FAMILY_BASE_CYCLONEII $end
+$var reg 1 |" FEATURE_FAMILY_BASE_CYCLONEII $end
+$var reg 160 }" device [160:1] $end
+$var reg 1 ~" var_family_base_cycloneii $end
+$upscope $end
+$scope function FEATURE_FAMILY_BASE_STRATIX $end
+$var reg 1 !# FEATURE_FAMILY_BASE_STRATIX $end
+$var reg 160 "# device [160:1] $end
+$var reg 1 ## var_family_base_stratix $end
+$upscope $end
+$scope function FEATURE_FAMILY_BASE_STRATIXII $end
+$var reg 1 $# FEATURE_FAMILY_BASE_STRATIXII $end
+$var reg 160 %# device [160:1] $end
+$var reg 1 &# var_family_base_stratixii $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONE $end
+$var reg 1 '# FEATURE_FAMILY_CYCLONE $end
+$var reg 160 (# device [160:1] $end
+$var reg 1 )# var_family_cyclone $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONEII $end
+$var reg 1 *# FEATURE_FAMILY_CYCLONEII $end
+$var reg 160 +# device [160:1] $end
+$var reg 1 ,# var_family_cycloneii $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONEIII $end
+$var reg 1 -# FEATURE_FAMILY_CYCLONEIII $end
+$var reg 160 .# device [160:1] $end
+$var reg 1 /# var_family_cycloneiii $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONEIVE $end
+$var reg 1 0# FEATURE_FAMILY_CYCLONEIVE $end
+$var reg 160 1# device [160:1] $end
+$var reg 1 2# var_family_cycloneive $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONEIVGX $end
+$var reg 1 3# FEATURE_FAMILY_CYCLONEIVGX $end
+$var reg 160 4# device [160:1] $end
+$var reg 1 5# var_family_cycloneivgx $end
+$upscope $end
+$scope function FEATURE_FAMILY_CYCLONEV $end
+$var reg 1 6# FEATURE_FAMILY_CYCLONEV $end
+$var reg 160 7# device [160:1] $end
+$var reg 1 8# var_family_cyclonev $end
+$upscope $end
+$scope function FEATURE_FAMILY_HARDCOPYIII $end
+$var reg 1 9# FEATURE_FAMILY_HARDCOPYIII $end
+$var reg 160 :# device [160:1] $end
+$var reg 1 ;# var_family_hardcopyiii $end
+$upscope $end
+$scope function FEATURE_FAMILY_HARDCOPYIV $end
+$var reg 1 <# FEATURE_FAMILY_HARDCOPYIV $end
+$var reg 160 =# device [160:1] $end
+$var reg 1 ># var_family_hardcopyiv $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_ALTERA_MULT_ADD_FLOW $end
+$var reg 1 ?# FEATURE_FAMILY_HAS_ALTERA_MULT_ADD_FLOW $end
+$var reg 160 @# device [160:1] $end
+$var reg 1 A# var_family_has_altera_mult_add_flow $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_INVERTED_OUTPUT_DDIO $end
+$var reg 1 B# FEATURE_FAMILY_HAS_INVERTED_OUTPUT_DDIO $end
+$var reg 160 C# device [160:1] $end
+$var reg 1 D# var_family_has_inverted_output_ddio $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_STRATIXIII_STYLE_RAM $end
+$var reg 1 E# FEATURE_FAMILY_HAS_STRATIXIII_STYLE_RAM $end
+$var reg 160 F# device [160:1] $end
+$var reg 1 G# var_family_has_stratixiii_style_ram $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_STRATIXII_STYLE_PLL $end
+$var reg 1 H# FEATURE_FAMILY_HAS_STRATIXII_STYLE_PLL $end
+$var reg 160 I# device [160:1] $end
+$var reg 1 J# var_family_has_stratixii_style_pll $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_STRATIXII_STYLE_RAM $end
+$var reg 1 K# FEATURE_FAMILY_HAS_STRATIXII_STYLE_RAM $end
+$var reg 160 L# device [160:1] $end
+$var reg 1 M# var_family_has_stratixii_style_ram $end
+$upscope $end
+$scope function FEATURE_FAMILY_HAS_STRATIX_STYLE_PLL $end
+$var reg 1 N# FEATURE_FAMILY_HAS_STRATIX_STYLE_PLL $end
+$var reg 160 O# device [160:1] $end
+$var reg 1 P# var_family_has_stratix_style_pll $end
+$upscope $end
+$scope function FEATURE_FAMILY_IS_ALTMULT_ADD_EOL $end
+$var reg 1 Q# FEATURE_FAMILY_IS_ALTMULT_ADD_EOL $end
+$var reg 160 R# device [160:1] $end
+$var reg 1 S# var_family_is_altmult_add_eol $end
+$upscope $end
+$scope function FEATURE_FAMILY_MAX10 $end
+$var reg 1 T# FEATURE_FAMILY_MAX10 $end
+$var reg 160 U# device [160:1] $end
+$var reg 1 V# var_family_max10 $end
+$upscope $end
+$scope function FEATURE_FAMILY_MAXII $end
+$var reg 1 W# FEATURE_FAMILY_MAXII $end
+$var reg 160 X# device [160:1] $end
+$var reg 1 Y# var_family_maxii $end
+$upscope $end
+$scope function FEATURE_FAMILY_MAXV $end
+$var reg 1 Z# FEATURE_FAMILY_MAXV $end
+$var reg 160 [# device [160:1] $end
+$var reg 1 \# var_family_maxv $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIX $end
+$var reg 1 ]# FEATURE_FAMILY_STRATIX $end
+$var reg 160 ^# device [160:1] $end
+$var reg 1 _# var_family_stratix $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIX10 $end
+$var reg 1 `# FEATURE_FAMILY_STRATIX10 $end
+$var reg 160 a# device [160:1] $end
+$var reg 1 b# var_family_stratix10 $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXGX $end
+$var reg 1 c# FEATURE_FAMILY_STRATIXGX $end
+$var reg 160 d# device [160:1] $end
+$var reg 1 e# var_family_stratixgx $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXII $end
+$var reg 1 f# FEATURE_FAMILY_STRATIXII $end
+$var reg 160 g# device [160:1] $end
+$var reg 1 h# var_family_stratixii $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXIIGX $end
+$var reg 1 i# FEATURE_FAMILY_STRATIXIIGX $end
+$var reg 160 j# device [160:1] $end
+$var reg 1 k# var_family_stratixiigx $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXIII $end
+$var reg 1 l# FEATURE_FAMILY_STRATIXIII $end
+$var reg 160 m# device [160:1] $end
+$var reg 1 n# var_family_stratixiii $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXIV $end
+$var reg 1 o# FEATURE_FAMILY_STRATIXIV $end
+$var reg 160 p# device [160:1] $end
+$var reg 1 q# var_family_stratixiv $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIXV $end
+$var reg 1 r# FEATURE_FAMILY_STRATIXV $end
+$var reg 160 s# device [160:1] $end
+$var reg 1 t# var_family_stratixv $end
+$upscope $end
+$scope function FEATURE_FAMILY_STRATIX_HC $end
+$var reg 1 u# FEATURE_FAMILY_STRATIX_HC $end
+$var reg 160 v# device [160:1] $end
+$var reg 1 w# var_family_stratix_hc $end
+$upscope $end
+$scope function IS_FAMILY_ARRIA10 $end
+$var reg 1 x# IS_FAMILY_ARRIA10 $end
+$var reg 160 y# device [160:1] $end
+$var reg 1 z# is_arria10 $end
+$upscope $end
+$scope function IS_FAMILY_ARRIAGX $end
+$var reg 1 {# IS_FAMILY_ARRIAGX $end
+$var reg 160 |# device [160:1] $end
+$var reg 1 }# is_arriagx $end
+$upscope $end
+$scope function IS_FAMILY_ARRIAIIGX $end
+$var reg 1 ~# IS_FAMILY_ARRIAIIGX $end
+$var reg 160 !$ device [160:1] $end
+$var reg 1 "$ is_arriaiigx $end
+$upscope $end
+$scope function IS_FAMILY_ARRIAIIGZ $end
+$var reg 1 #$ IS_FAMILY_ARRIAIIGZ $end
+$var reg 160 $$ device [160:1] $end
+$var reg 1 %$ is_arriaiigz $end
+$upscope $end
+$scope function IS_FAMILY_ARRIAV $end
+$var reg 1 &$ IS_FAMILY_ARRIAV $end
+$var reg 160 '$ device [160:1] $end
+$var reg 1 ($ is_arriav $end
+$upscope $end
+$scope function IS_FAMILY_ARRIAVGZ $end
+$var reg 1 )$ IS_FAMILY_ARRIAVGZ $end
+$var reg 160 *$ device [160:1] $end
+$var reg 1 +$ is_arriavgz $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONE $end
+$var reg 1 ,$ IS_FAMILY_CYCLONE $end
+$var reg 160 -$ device [160:1] $end
+$var reg 1 .$ is_cyclone $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEII $end
+$var reg 1 /$ IS_FAMILY_CYCLONEII $end
+$var reg 160 0$ device [160:1] $end
+$var reg 1 1$ is_cycloneii $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEIII $end
+$var reg 1 2$ IS_FAMILY_CYCLONEIII $end
+$var reg 160 3$ device [160:1] $end
+$var reg 1 4$ is_cycloneiii $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEIIILS $end
+$var reg 1 5$ IS_FAMILY_CYCLONEIIILS $end
+$var reg 160 6$ device [160:1] $end
+$var reg 1 7$ is_cycloneiiils $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEIVE $end
+$var reg 1 8$ IS_FAMILY_CYCLONEIVE $end
+$var reg 160 9$ device [160:1] $end
+$var reg 1 :$ is_cycloneive $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEIVGX $end
+$var reg 1 ;$ IS_FAMILY_CYCLONEIVGX $end
+$var reg 160 <$ device [160:1] $end
+$var reg 1 =$ is_cycloneivgx $end
+$upscope $end
+$scope function IS_FAMILY_CYCLONEV $end
+$var reg 1 >$ IS_FAMILY_CYCLONEV $end
+$var reg 160 ?$ device [160:1] $end
+$var reg 1 @$ is_cyclonev $end
+$upscope $end
+$scope function IS_FAMILY_HARDCOPYII $end
+$var reg 1 A$ IS_FAMILY_HARDCOPYII $end
+$var reg 160 B$ device [160:1] $end
+$var reg 1 C$ is_hardcopyii $end
+$upscope $end
+$scope function IS_FAMILY_HARDCOPYIII $end
+$var reg 1 D$ IS_FAMILY_HARDCOPYIII $end
+$var reg 160 E$ device [160:1] $end
+$var reg 1 F$ is_hardcopyiii $end
+$upscope $end
+$scope function IS_FAMILY_HARDCOPYIV $end
+$var reg 1 G$ IS_FAMILY_HARDCOPYIV $end
+$var reg 160 H$ device [160:1] $end
+$var reg 1 I$ is_hardcopyiv $end
+$upscope $end
+$scope function IS_FAMILY_MAX10 $end
+$var reg 1 J$ IS_FAMILY_MAX10 $end
+$var reg 160 K$ device [160:1] $end
+$var reg 1 L$ is_max10 $end
+$upscope $end
+$scope function IS_FAMILY_MAXII $end
+$var reg 1 M$ IS_FAMILY_MAXII $end
+$var reg 160 N$ device [160:1] $end
+$var reg 1 O$ is_maxii $end
+$upscope $end
+$scope function IS_FAMILY_MAXV $end
+$var reg 1 P$ IS_FAMILY_MAXV $end
+$var reg 160 Q$ device [160:1] $end
+$var reg 1 R$ is_maxv $end
+$upscope $end
+$scope function IS_FAMILY_STRATIX $end
+$var reg 1 S$ IS_FAMILY_STRATIX $end
+$var reg 160 T$ device [160:1] $end
+$var reg 1 U$ is_stratix $end
+$upscope $end
+$scope function IS_FAMILY_STRATIX10 $end
+$var reg 1 V$ IS_FAMILY_STRATIX10 $end
+$var reg 160 W$ device [160:1] $end
+$var reg 1 X$ is_stratix10 $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXGX $end
+$var reg 1 Y$ IS_FAMILY_STRATIXGX $end
+$var reg 160 Z$ device [160:1] $end
+$var reg 1 [$ is_stratixgx $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXII $end
+$var reg 1 \$ IS_FAMILY_STRATIXII $end
+$var reg 160 ]$ device [160:1] $end
+$var reg 1 ^$ is_stratixii $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXIIGX $end
+$var reg 1 _$ IS_FAMILY_STRATIXIIGX $end
+$var reg 160 `$ device [160:1] $end
+$var reg 1 a$ is_stratixiigx $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXIII $end
+$var reg 1 b$ IS_FAMILY_STRATIXIII $end
+$var reg 160 c$ device [160:1] $end
+$var reg 1 d$ is_stratixiii $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXIV $end
+$var reg 1 e$ IS_FAMILY_STRATIXIV $end
+$var reg 160 f$ device [160:1] $end
+$var reg 1 g$ is_stratixiv $end
+$upscope $end
+$scope function IS_FAMILY_STRATIXV $end
+$var reg 1 h$ IS_FAMILY_STRATIXV $end
+$var reg 160 i$ device [160:1] $end
+$var reg 1 j$ is_stratixv $end
+$upscope $end
+$scope function IS_VALID_FAMILY $end
+$var reg 1 k$ IS_VALID_FAMILY $end
+$var reg 160 l$ device [160:1] $end
+$var reg 1 m$ is_valid $end
+$upscope $end
+$upscope $end
+$scope module mem $end
+$scope function ecc_parity $end
+$var reg 8 n$ ecc_parity [7:0] $end
+$var integer 32 o$ err [31:0] $end
+$var integer 32 p$ flag [31:0] $end
+$var integer 32 q$ flag_double [31:0] $end
+$var integer 32 r$ flag_err [31:0] $end
+$var integer 32 s$ flag_no_err [31:0] $end
+$var integer 32 t$ flag_single [31:0] $end
+$var integer 32 u$ flag_triple [31:0] $end
+$var integer 32 v$ flag_uncorr [31:0] $end
+$var integer 32 w$ found [31:0] $end
+$var integer 32 x$ found_2 [31:0] $end
+$var reg 8 y$ i_eccencparity [7:0] $end
+$var integer 32 z$ n [31:0] $end
+$var integer 32 {$ pointer [31:0] $end
+$var integer 32 |$ pointer_max [31:0] $end
+$var integer 32 }$ pointer_min [31:0] $end
+$upscope $end
+$scope function tolower $end
+$var reg 8 ~$ conv_char [8:1] $end
+$var reg 8 !% given_character [8:1] $end
+$var reg 8 "% tolower [8:1] $end
+$upscope $end
+$scope task convert_hex2ver $end
+$var integer 32 #% aaaa [31:0] $end
+$var integer 32 $% aaaa_pre [31:0] $end
+$var integer 32 %% aah [31:0] $end
+$var integer 32 &% aal [31:0] $end
+$var reg 8 '% c [8:1] $end
+$var integer 32 (% cc [31:0] $end
+$var integer 32 )% dd [31:0] $end
+$var integer 32 *% divide_factor [31:0] $end
+$var reg 1 +% done $end
+$var reg 1 ,% error_status $end
+$var reg 1 -% first_normal_record $end
+$var reg 1 .% first_rec $end
+$var reg 4 /% hex [3:0] $end
+$var integer 32 0% i [31:0] $end
+$var integer 32 1% ifp [31:0] $end
+$var reg 2048 2% in_file [2048:1] $end
+$var reg 1 3% is_word_address_format $end
+$var integer 32 4% j [31:0] $end
+$var integer 32 5% k [31:0] $end
+$var reg 1 6% last_rec $end
+$var integer 32 7% line_no [31:0] $end
+$var integer 32 8% m [31:0] $end
+$var integer 32 9% nn [31:0] $end
+$var integer 32 :% off_addr [31:0] $end
+$var integer 32 ;% ofp [31:0] $end
+$var reg 2048 <% out_file [2048:1] $end
+$var integer 32 =% r [31:0] $end
+$var integer 32 >% sum [31:0] $end
+$var integer 32 ?% tt [31:0] $end
+$var integer 32 @% width [31:0] $end
+$scope begin READER $end
+$upscope $end
+$upscope $end
+$scope task convert_mif2ver $end
+$var integer 32 A% aah [31:0] $end
+$var integer 32 B% aal [31:0] $end
+$var integer 32 C% address [31:0] $end
+$var reg 24 D% address_radix [24:1] $end
+$var reg 1 E% address_radix_found $end
+$var reg 2048 F% buffer [2048:1] $end
+$var reg 8 G% c [8:1] $end
+$var integer 32 H% cc [31:0] $end
+$var integer 32 I% character_count [31:0] $end
+$var integer 32 J% comment_with_double_minus_found [31:0] $end
+$var integer 32 K% comment_with_percent_found [31:0] $end
+$var reg 24 L% data_radix [24:1] $end
+$var reg 1 M% data_radix_found $end
+$var integer 32 N% dd [31:0] $end
+$var reg 1 O% depth_found $end
+$var reg 1 P% display_address $end
+$var reg 1 Q% done $end
+$var integer 32 R% end_address [31:0] $end
+$var reg 1 S% error_status $end
+$var reg 1 T% first_rec $end
+$var reg 1 U% get_address $end
+$var reg 1 V% get_address_data_pairs $end
+$var reg 1 W% get_address_radix $end
+$var reg 1 X% get_data $end
+$var reg 1 Y% get_data_radix $end
+$var reg 1 Z% get_depth $end
+$var reg 1 [% get_end_address $end
+$var reg 1 \% get_start_address $end
+$var reg 1 ]% get_width $end
+$var reg 4 ^% hex [3:0] $end
+$var integer 32 _% i [31:0] $end
+$var integer 32 `% ifp [31:0] $end
+$var reg 2048 a% in_file [2048:1] $end
+$var reg 1 b% invalid_address $end
+$var reg 1 c% last_rec $end
+$var integer 32 d% line_no [31:0] $end
+$var reg 1025 e% memory_data1 [1024:0] $end
+$var reg 1025 f% memory_data2 [1024:0] $end
+$var integer 32 g% memory_depth [31:0] $end
+$var integer 32 h% memory_width [31:0] $end
+$var integer 32 i% negative [31:0] $end
+$var integer 32 j% nn [31:0] $end
+$var integer 32 k% off_addr [31:0] $end
+$var integer 32 l% ofp [31:0] $end
+$var reg 2048 m% out_file [2048:1] $end
+$var integer 32 n% r [31:0] $end
+$var integer 32 o% start_address [31:0] $end
+$var integer 32 p% sum [31:0] $end
+$var reg 4 q% tmp_char [3:0] $end
+$var integer 32 r% tt [31:0] $end
+$var integer 32 s% value [31:0] $end
+$var integer 32 t% width [31:0] $end
+$var reg 1 u% width_found $end
+$scope begin READER $end
+$upscope $end
+$upscope $end
+$scope task convert_to_ver_file $end
+$var reg 2048 v% in_file [2048:1] $end
+$var reg 2048 w% out_file [2048:1] $end
+$var integer 32 x% width [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end

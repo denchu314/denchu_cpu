@@ -1,0 +1,48 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Sun Mar 17 10:20:32 2019
+[*]
+[dumpfile] "/home/daichi/modakio/hardware/cpu/fifo/main.vcd"
+[dumpfile_mtime] "Sun Mar 17 10:19:25 2019"
+[dumpfile_size] 6641
+[savefile] "/home/daichi/modakio/hardware/cpu/fifo/fifo.gtkw"
+[timestart] 0
+[size] 1920 1017
+[pos] 2473 -87
+*-11.000000 3520 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[sst_width] 210
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 588
+@28
+main.uFifo.rst
+main.uFifo.clk
+@22
+main.uFifo.i_snk_data[31:0]
+@28
+main.uFifo.i_snk_valid
+main.uFifo.o_snk_ready
+@22
+main.uFifo.o_src_data[31:0]
+@28
+main.uFifo.o_src_valid
+@29
+main.uFifo.i_src_ready
+@24
+main.uFifo.w_ptr[2:0]
+main.uFifo.r_ptr[2:0]
+@28
+main.uFifo.w_empty
+main.uFifo.w_full
+@22
+main.uFifo.\mem[0][31:0]
+main.uFifo.\mem[1][31:0]
+main.uFifo.\mem[2][31:0]
+main.uFifo.\mem[3][31:0]
+main.uFifo.\mem[4][31:0]
+main.uFifo.\mem[5][31:0]
+main.uFifo.\mem[6][31:0]
+main.uFifo.\mem[7][31:0]
+[pattern_trace] 1
+[pattern_trace] 0

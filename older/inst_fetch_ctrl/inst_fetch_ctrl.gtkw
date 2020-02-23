@@ -1,0 +1,61 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Sat Mar 23 17:25:22 2019
+[*]
+[dumpfile] "/home/daichi/modakio/hardware/cpu/inst_fetch_ctrl/main.vcd"
+[dumpfile_mtime] "Sat Mar 23 17:13:53 2019"
+[dumpfile_size] 45874
+[savefile] "/home/daichi/modakio/hardware/cpu/inst_fetch_ctrl/inst_fetch_ctrl.gtkw"
+[timestart] 0
+[size] 1280 657
+[pos] -165 -90
+*-12.000000 5260 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[sst_width] 210
+[signals_width] 313
+[sst_expanded] 1
+[sst_vpaned_height] 174
+@28
+main.uInst_fetch_ctrl.rst
+main.uInst_fetch_ctrl.clk
+@22
+main.uInst_fetch_ctrl.o_ret_addr[17:0]
+@28
+main.uInst_fetch_ctrl.o_ret_addr_valid
+@22
+main.uInst_fetch_ctrl.i_jr_addr[17:0]
+@28
+main.uInst_fetch_ctrl.i_jr_valid
+@22
+main.uInst_fetch_ctrl.i_j_addr[17:0]
+@28
+main.uInst_fetch_ctrl.i_j_valid
+@22
+main.uInst_fetch_ctrl.i_jal_addr[17:0]
+@28
+main.uInst_fetch_ctrl.i_jal_valid
+@22
+main.uInst_fetch_ctrl.o_inst[31:0]
+@28
+main.uInst_fetch_ctrl.o_inst_valid
+main.uInst_fetch_ctrl.o_rst_inst_fifo
+main.uInst_fetch_ctrl.i_inst_complete
+main.uInst_fetch_ctrl.o_inst_empty
+@23
+[color] 2
+main.uInst_fetch_ctrl.o_burstcount[31:0]
+[color] 2
+main.uInst_fetch_ctrl.o_addr[17:0]
+@29
+[color] 2
+main.uInst_fetch_ctrl.o_read
+[color] 2
+main.uInst_fetch_ctrl.i_waitrequest
+@23
+[color] 2
+main.uInst_fetch_ctrl.i_readdata[31:0]
+@29
+[color] 2
+main.uInst_fetch_ctrl.i_readdatavalid
+[pattern_trace] 1
+[pattern_trace] 0

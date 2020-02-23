@@ -1,0 +1,55 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Sat Mar 23 03:57:03 2019
+[*]
+[dumpfile] "/home/daichi/modakio/hardware/cpu/mMM_to_ST_arb/main.vcd"
+[dumpfile_mtime] "Sat Mar 23 03:56:12 2019"
+[dumpfile_size] 82760
+[savefile] "/home/daichi/modakio/hardware/cpu/mMM_to_ST_arb/mMM_to_ST_arb.gtkw"
+[timestart] 0
+[size] 1280 657
+[pos] -113 -90
+*-11.000000 7500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[treeopen] main.uMM_to_ST_arb.
+[sst_width] 210
+[signals_width] 190
+[sst_expanded] 1
+[sst_vpaned_height] 223
+@28
+main.uMM_to_ST_arb.rst
+main.uMM_to_ST_arb.clk
+@22
+main.uMM_to_ST_arb.i_writedata[31:0]
+main.uMM_to_ST_arb.i_addr[17:0]
+@28
+main.uMM_to_ST_arb.i_read_req
+main.uMM_to_ST_arb.i_write_req
+@22
+main.uMM_to_ST_arb.o_readdata[31:0]
+@28
+main.uMM_to_ST_arb.o_valid
+main.uMM_to_ST_arb.o_write_mem_complete
+main.uMM_to_ST_arb.o_read_mem_complete
+@22
+[color] 2
+main.uMM_to_ST_arb.o_writedata[31:0]
+@28
+[color] 2
+main.uMM_to_ST_arb.o_write
+@22
+[color] 2
+main.uMM_to_ST_arb.o_addr[17:0]
+@29
+[color] 2
+main.uMM_to_ST_arb.o_read
+@22
+[color] 2
+main.uMM_to_ST_arb.i_readdata[31:0]
+@28
+[color] 2
+main.uMM_to_ST_arb.i_readdatavalid
+[color] 2
+main.uMM_to_ST_arb.i_waitrequest
+[pattern_trace] 1
+[pattern_trace] 0

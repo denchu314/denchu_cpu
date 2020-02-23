@@ -1,0 +1,56 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate C:\Users\moe\Documents\project\cpu\memory\memory.qsys --block-symbol-file --output-directory=C:\Users\moe\Documents\project\cpu\memory\memory --family="Cyclone IV E" --part=EP4CE22F17C6
+Progress: Loading memory/memory.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 16.1]
+Progress: Parameterizing module clk_0
+Progress: Adding master_0 [altera_jtag_avalon_master 16.1]
+Progress: Parameterizing module master_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 16.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\Users\moe\Documents\project\cpu\memory\memory.qsys --synthesis=VERILOG --output-directory=C:\Users\moe\Documents\project\cpu\memory\memory\synthesis --family="Cyclone IV E" --part=EP4CE22F17C6
+Progress: Loading memory/memory.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 16.1]
+Progress: Parameterizing module clk_0
+Progress: Adding master_0 [altera_jtag_avalon_master 16.1]
+Progress: Parameterizing module master_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 16.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: memory: Generating memory "memory" for QUARTUS_SYNTH
+Info: Interconnect is inserted between master master_0.master and slave onchip_memory2_0.s1 because the master has address signal 32 bit wide, but the slave is 16 bit wide.
+Info: Interconnect is inserted between master master_0.master and slave onchip_memory2_0.s1 because the master has read signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master master_0.master and slave onchip_memory2_0.s1 because the master has waitrequest signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master master_0.master and slave onchip_memory2_0.s1 because the master has readdatavalid signal 1 bit wide, but the slave is 0 bit wide.
+Info: master_0: "memory" instantiated altera_jtag_avalon_master "master_0"
+Info: onchip_memory2_0: Starting RTL generation for module 'memory_onchip_memory2_0'
+Info: onchip_memory2_0:   Generation command is [exec C:/intelfpga_lite/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/16.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/16.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/intelfpga_lite/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=memory_onchip_memory2_0 --dir=C:/Users/moe/AppData/Local/Temp/alt7978_918491281640388873.dir/0005_onchip_memory2_0_gen/ --quartus_dir=C:/intelfpga_lite/16.1/quartus --verilog --config=C:/Users/moe/AppData/Local/Temp/alt7978_918491281640388873.dir/0005_onchip_memory2_0_gen//memory_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0: Done RTL generation for module 'memory_onchip_memory2_0'
+Info: onchip_memory2_0: "memory" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: mm_interconnect_0: "memory" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: rst_controller: "memory" instantiated altera_reset_controller "rst_controller"
+Info: jtag_phy_embedded_in_jtag_master: "master_0" instantiated altera_jtag_dc_streaming "jtag_phy_embedded_in_jtag_master"
+Info: timing_adt: "master_0" instantiated timing_adapter "timing_adt"
+Info: fifo: "master_0" instantiated altera_avalon_sc_fifo "fifo"
+Info: b2p: "master_0" instantiated altera_avalon_st_bytes_to_packets "b2p"
+Info: p2b: "master_0" instantiated altera_avalon_st_packets_to_bytes "p2b"
+Info: transacto: "master_0" instantiated altera_avalon_packets_to_master "transacto"
+Info: b2p_adapter: "master_0" instantiated channel_adapter "b2p_adapter"
+Info: p2b_adapter: "master_0" instantiated channel_adapter "p2b_adapter"
+Info: master_0_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "master_0_master_translator"
+Info: onchip_memory2_0_s1_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "onchip_memory2_0_s1_translator"
+Info: memory: Done "memory" with 15 modules, 28 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

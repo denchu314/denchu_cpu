@@ -1,0 +1,31 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Apr 30 12:16:56 2019
+[*]
+[dumpfile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/alu/main.vcd"
+[dumpfile_mtime] "Tue Apr 30 12:15:24 2019"
+[dumpfile_size] 22652
+[savefile] "/mnt/c/intelFPGA_lite/16.1/work/cpu/alu/main.gtkw"
+[timestart] 0
+[size] 1280 657
+[pos] -113 -90
+*-13.000000 810 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[sst_width] 210
+[signals_width] 198
+[sst_expanded] 1
+[sst_vpaned_height] 174
+@28
+main.uAlu.rst
+main.uAlu.clk
+main.uAlu.i_calc_start
+main.uAlu.i_type[1:0]
+@22
+main.uAlu.i_op[3:0]
+main.uAlu.i_operand_0_val[31:0]
+main.uAlu.i_operand_1_val[31:0]
+main.uAlu.o_result_val[31:0]
+@29
+main.uAlu.o_result_valid
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,95 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x1ade000 .scope module, "main" "main" 2 5;
+ .timescale -9 -9;
+P_0x1b012f8 .param/l "CYCLE" 2 13, +C4<01111101000>;
+v0x1b15770_0 .net *"_s3", 30 0, C4<0000000000000000000000000000000>; 1 drivers
+v0x1b15830_0 .net *"_s8", 30 0, C4<0000000000000000000000000000000>; 1 drivers
+v0x1b158d0_0 .var "a", 0 0;
+v0x1b15970_0 .var "b", 0 0;
+v0x1b159f0_0 .var "clk", 0 0;
+v0x1b15a90_0 .var "rst", 0 0;
+v0x1b15b70_0 .var "sel", 0 0;
+L_0x1b15ea0 .concat [ 1 31 0 0], v0x1b158d0_0, C4<0000000000000000000000000000000>;
+L_0x1b16080 .concat [ 1 31 0 0], v0x1b15970_0, C4<0000000000000000000000000000000>;
+S_0x1b04e90 .scope module, "uMux" "mMux" 2 54, 3 8, S_0x1ade000;
+ .timescale -9 -9;
+P_0x1acb5f8 .param/l "pStreamBits" 3 9, +C4<0100000>;
+L_0x1b15c60 .functor XNOR 1, v0x1b15b70_0, C4<0>, C4<0>, C4<0>;
+v0x1b04f80_0 .net *"_s0", 0 0, C4<0>; 1 drivers
+v0x1b15400_0 .net *"_s2", 0 0, L_0x1b15c60; 1 drivers
+v0x1b154a0_0 .net "iIn0", 31 0, L_0x1b15ea0; 1 drivers
+v0x1b15540_0 .net "iIn1", 31 0, L_0x1b16080; 1 drivers
+v0x1b155f0_0 .net "oOut", 31 0, L_0x1b15d90; 1 drivers
+v0x1b15690_0 .net "sel", 0 0, v0x1b15b70_0; 1 drivers
+L_0x1b15d90 .functor MUXZ 32, L_0x1b16080, L_0x1b15ea0, L_0x1b15c60, C4<>;
+    .scope S_0x1ade000;
+T_0 ;
+    %set/v v0x1b15a90_0, 1, 1;
+    %delay 4000, 0;
+    %set/v v0x1b15a90_0, 0, 1;
+    %end;
+    .thread T_0;
+    .scope S_0x1ade000;
+T_1 ;
+    %set/v v0x1b159f0_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x1ade000;
+T_2 ;
+    %delay 500, 0;
+    %load/v 8, v0x1b159f0_0, 1;
+    %inv 8, 1;
+    %set/v v0x1b159f0_0, 8, 1;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x1ade000;
+T_3 ;
+    %vpi_call 2 32 "$dumpfile", "main.vcd";
+    %vpi_call 2 33 "$dumpvars", 1'sb0, S_0x1ade000;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15b70_0, 0, 1;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 1;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 1;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 0;
+    %delay 100000, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b158d0_0, 0, 0;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1b15970_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 49 "$finish";
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "main.v";
+    "mMux.v";

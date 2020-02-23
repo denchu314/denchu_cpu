@@ -1,0 +1,126 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x1649100 .scope module, "main" "main" 2 6;
+ .timescale -9 -9;
+P_0x1649898 .param/l "CYCLE" 2 14, +C4<01111101000>;
+v0x1672a50_0 .var "a", 31 0;
+v0x1672c40_0 .var "addr", 4 0;
+v0x1672cc0_0 .var "clk", 0 0;
+v0x1672d70_0 .var "rst", 0 0;
+v0x1672e20_0 .var "valid", 0 0;
+S_0x165d680 .scope module, "uRegister" "mRegister" 2 50, 3 9, S_0x1649100;
+ .timescale -9 -9;
+v0x165d770_0 .net *"_s0", 5 0, L_0x1672ed0; 1 drivers
+v0x1671c30_0 .net *"_s10", 31 0, L_0x16731f0; 1 drivers
+v0x1671cd0_0 .net *"_s14", 5 0, L_0x16734d0; 1 drivers
+v0x1671d70_0 .net *"_s17", 0 0, C4<0>; 1 drivers
+v0x1671e20_0 .net *"_s18", 5 0, C4<000000>; 1 drivers
+v0x1671ec0_0 .net *"_s20", 0 0, L_0x1673670; 1 drivers
+v0x1671fa0_0 .net *"_s22", 31 0, C4<00000000000000000000000000000000>; 1 drivers
+v0x1672040_0 .net *"_s24", 31 0, L_0x16738a0; 1 drivers
+v0x1672130_0 .net *"_s3", 0 0, C4<0>; 1 drivers
+v0x16721d0_0 .net *"_s4", 5 0, C4<000000>; 1 drivers
+v0x16722d0_0 .net *"_s6", 0 0, L_0x1673040; 1 drivers
+v0x1672370_0 .net *"_s8", 31 0, C4<00000000000000000000000000000000>; 1 drivers
+v0x1672480_0 .net "clk", 0 0, v0x1672cc0_0; 1 drivers
+v0x1672520_0 .net "iDstAddr", 4 0, v0x1672c40_0; 1 drivers
+v0x1672640_0 .net "iDstVal", 31 0, v0x1672a50_0; 1 drivers
+v0x16726e0_0 .net "iDstValid", 0 0, v0x1672e20_0; 1 drivers
+v0x16725a0_0 .net "iSrc0Addr", 4 0, C4<00000>; 1 drivers
+v0x1672830_0 .net "iSrc1Addr", 4 0, C4<00001>; 1 drivers
+v0x1672950_0 .net "oSrc0Val", 31 0, L_0x16732e0; 1 drivers
+v0x16729d0_0 .net "oSrc1Val", 31 0, L_0x1673990; 1 drivers
+v0x16728b0 .array "rRegisters", 0 31, 31 0;
+v0x1672b00_0 .net "rst", 0 0, v0x1672d70_0; 1 drivers
+E_0x1649a00 .event posedge, v0x1672480_0;
+L_0x1672ed0 .concat [ 5 1 0 0], C4<00000>, C4<0>;
+L_0x1673040 .cmp/eq 6, L_0x1672ed0, C4<000000>;
+L_0x16731f0 .array/port v0x16728b0, C4<00000>;
+L_0x16732e0 .functor MUXZ 32, L_0x16731f0, C4<00000000000000000000000000000000>, L_0x1673040, C4<>;
+L_0x16734d0 .concat [ 5 1 0 0], C4<00001>, C4<0>;
+L_0x1673670 .cmp/eq 6, L_0x16734d0, C4<000000>;
+L_0x16738a0 .array/port v0x16728b0, C4<00001>;
+L_0x1673990 .functor MUXZ 32, L_0x16738a0, C4<00000000000000000000000000000000>, L_0x1673670, C4<>;
+    .scope S_0x165d680;
+T_0 ;
+    %wait E_0x1649a00;
+    %load/v 8, v0x1672b00_0, 1;
+    %jmp/0xz  T_0.0, 8;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/v 8, v0x16726e0_0, 1;
+    %jmp/0xz  T_0.2, 8;
+    %load/v 8, v0x1672640_0, 32;
+    %ix/getv 3, v0x1672520_0;
+    %jmp/1 t_0, 4;
+    %ix/load 0, 32, 0; word width
+    %ix/load 1, 0, 0; part off
+    %assign/av v0x16728b0, 0, 8;
+t_0 ;
+T_0.2 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x1649100;
+T_1 ;
+    %set/v v0x1672d70_0, 1, 1;
+    %delay 4000, 0;
+    %set/v v0x1672d70_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x1649100;
+T_2 ;
+    %set/v v0x1672cc0_0, 0, 1;
+    %end;
+    .thread T_2;
+    .scope S_0x1649100;
+T_3 ;
+    %delay 500, 0;
+    %load/v 8, v0x1672cc0_0, 1;
+    %inv 8, 1;
+    %set/v v0x1672cc0_0, 8, 1;
+    %jmp T_3;
+    .thread T_3;
+    .scope S_0x1649100;
+T_4 ;
+    %vpi_call 2 33 "$dumpfile", "main.vcd";
+    %vpi_call 2 34 "$dumpvars", 1'sb0, S_0x1649100;
+    %movi 8, 810, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x1672a50_0, 0, 8;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1672e20_0, 0, 0;
+    %movi 8, 1, 5;
+    %ix/load 0, 5, 0;
+    %assign/v0 v0x1672c40_0, 0, 8;
+    %delay 100000, 0;
+    %movi 8, 810, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x1672a50_0, 0, 8;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1672e20_0, 0, 1;
+    %movi 8, 1, 5;
+    %ix/load 0, 5, 0;
+    %assign/v0 v0x1672c40_0, 0, 8;
+    %delay 100000, 0;
+    %movi 8, 1919, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x1672a50_0, 0, 8;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1672e20_0, 0, 1;
+    %ix/load 0, 5, 0;
+    %assign/v0 v0x1672c40_0, 0, 0;
+    %delay 100000, 0;
+    %vpi_call 2 45 "$finish";
+    %end;
+    .thread T_4;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "main.v";
+    "mRegister.v";
