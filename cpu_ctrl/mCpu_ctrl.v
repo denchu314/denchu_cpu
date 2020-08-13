@@ -41,6 +41,8 @@ module mCpu_ctrl (
 	input				i_write,
 	output				o_permit_fetch,
 
+	input				i_shadow_switch,
+	
 	input				clk,
 	input				rst
 );
@@ -59,7 +61,7 @@ module mCpu_ctrl (
 	begin if(rst) begin
 			r_readdata <= 0;
 		end else if(i_addr == 0) begin
-			r_readdata <= r_state;
+			r_readdata <= w_state;
 		end else if(i_addr == 1) begin
 			r_readdata <= r_boot;
 		end
@@ -91,7 +93,7 @@ module mCpu_ctrl (
 	// state machine
 	//
 	//
-	reg	[3:0]	r_state;
+	reg	[3:0]	r_state_front;
 	wire	w_ready_to_fetch;
 	wire	w_______to_fetch;
 	wire	w_fetch_to_waitToFetch;
@@ -110,29 +112,67 @@ module mCpu_ctrl (
 	always @(posedge clk)
 	begin
 		if(rst) begin
-			r_state <= `STATE_READY;
+			r_state_front <= `STATE_READY;
 		end else if((i_addr == 0) && (i_write==1'b1)) begin
-			r_state	<= i_writedata;
-		end else begin
-			case (r_state)
-				`STATE_READY:		if(w_ready_to_fetch)			r_state <= `STATE_FETCH;
-				`STATE_FETCH:		if(w_fetch_to_waitToFetch) 		r_state <= `STATE_WAIT_TO_FETCH;
-				`STATE_WAIT_TO_FETCH: 	if(w_waitToFetch_to_fetch) 		r_state <= `STATE_FETCH;
-							else if(w_waitToFetch_to_calc) 		r_state <= `STATE_CALC;
-							else if(w_waitToFetch_to_lwst) 		r_state <= `STATE_LWST;
-							else if(w_______to_fetch) 		r_state <= `STATE_FETCH;
-				`STATE_CALC: 		if(w_calc_to_waitToCalc) 		r_state <= `STATE_WAIT_TO_CALC;
-					 		else if(w_______to_fetch) 		r_state <= `STATE_FETCH;
-				`STATE_WAIT_TO_CALC: 	if(w_waitToCalc_to_fetch) 		r_state <= `STATE_FETCH;
-							else if(w_waitToCalc_to_calc)		r_state	<= `STATE_CALC;
-							else if(w_waitToCalc_to_lwst)		r_state	<= `STATE_LWST;
-							else if(w_______to_fetch)		r_state	<= `STATE_FETCH;
-				`STATE_LWST: 		if(w_lwst_to_waitToLwst) 		r_state <= `STATE_WAIT_TO_LWST;
-					 		else if(w_______to_fetch) 		r_state <= `STATE_FETCH;
-				`STATE_WAIT_TO_LWST: 	if(w_waitToLwst_to_fetch) 		r_state <= `STATE_FETCH;
-							else if(w_waitToLwst_to_calc)		r_state	<= `STATE_CALC;
-							else if(w_waitToLwst_to_lwst)		r_state	<= `STATE_LWST;
-							else if(w_______to_fetch)		r_state	<= `STATE_FETCH;
+			r_state_front	<= i_writedata;
+		end else if(!i_shadow_switch) begin
+			case (r_state_front)
+				`STATE_READY:		if(w_ready_to_fetch)			r_state_front <= `STATE_FETCH;
+				`STATE_FETCH:		if(w_fetch_to_waitToFetch) 		r_state_front <= `STATE_WAIT_TO_FETCH;
+				`STATE_WAIT_TO_FETCH: 	if(w_waitToFetch_to_fetch) 		r_state_front <= `STATE_FETCH;
+							else if(w_waitToFetch_to_calc) 		r_state_front <= `STATE_CALC;
+							else if(w_waitToFetch_to_lwst) 		r_state_front <= `STATE_LWST;
+							else if(w_______to_fetch) 		r_state_front <= `STATE_FETCH;
+				`STATE_CALC: 		if(w_calc_to_waitToCalc) 		r_state_front <= `STATE_WAIT_TO_CALC;
+					 		else if(w_______to_fetch) 		r_state_front <= `STATE_FETCH;
+				`STATE_WAIT_TO_CALC: 	if(w_waitToCalc_to_fetch) 		r_state_front <= `STATE_FETCH;
+							else if(w_waitToCalc_to_calc)		r_state_front <= `STATE_CALC;
+							else if(w_waitToCalc_to_lwst)		r_state_front <= `STATE_LWST;
+							else if(w_______to_fetch)		r_state_front <= `STATE_FETCH;
+				`STATE_LWST: 		if(w_lwst_to_waitToLwst) 		r_state_front <= `STATE_WAIT_TO_LWST;
+					 		else if(w_______to_fetch) 		r_state_front <= `STATE_FETCH;
+				`STATE_WAIT_TO_LWST: 	if(w_waitToLwst_to_fetch) 		r_state_front <= `STATE_FETCH;
+							else if(w_waitToLwst_to_calc)		r_state_front <= `STATE_CALC;
+							else if(w_waitToLwst_to_lwst)		r_state_front <= `STATE_LWST;
+							else if(w_______to_fetch)		r_state_front <= `STATE_FETCH;
+			endcase
+		end
+	end
+	
+	///////////////////////////////////
+	// state machine shadow
+	//
+	//
+	reg	[3:0]	r_state_shadow;
+	wire	[3:0]	w_state;
+	assign	w_state = (i_shadow_switch)? r_state_shadow : r_state_front;
+
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_state_shadow <= `STATE_READY;
+		end else if((i_addr == 0) && (i_write==1'b1) & i_shadow_switch) begin
+			r_state_shadow	<= i_writedata;
+		end else if (i_shadow_switch) begin
+			case (r_state_shadow)
+				`STATE_READY:		if(1'b1)				r_state_shadow <= `STATE_FETCH;
+				`STATE_FETCH:		if(w_fetch_to_waitToFetch) 		r_state_shadow <= `STATE_WAIT_TO_FETCH;
+				`STATE_WAIT_TO_FETCH: 	if(w_waitToFetch_to_fetch) 		r_state_shadow <= `STATE_FETCH;
+							else if(w_waitToFetch_to_calc) 		r_state_shadow <= `STATE_CALC;
+							else if(w_waitToFetch_to_lwst) 		r_state_shadow <= `STATE_LWST;
+							else if(w_______to_fetch) 		r_state_shadow <= `STATE_FETCH;
+				`STATE_CALC: 		if(w_calc_to_waitToCalc) 		r_state_shadow <= `STATE_WAIT_TO_CALC;
+					 		else if(w_______to_fetch) 		r_state_shadow <= `STATE_FETCH;
+				`STATE_WAIT_TO_CALC: 	if(w_waitToCalc_to_fetch) 		r_state_shadow <= `STATE_FETCH;
+							else if(w_waitToCalc_to_calc)		r_state_shadow <= `STATE_CALC;
+							else if(w_waitToCalc_to_lwst)		r_state_shadow <= `STATE_LWST;
+							else if(w_______to_fetch)		r_state_shadow <= `STATE_FETCH;
+				`STATE_LWST: 		if(w_lwst_to_waitToLwst) 		r_state_shadow <= `STATE_WAIT_TO_LWST;
+					 		else if(w_______to_fetch) 		r_state_shadow <= `STATE_FETCH;
+				`STATE_WAIT_TO_LWST: 	if(w_waitToLwst_to_fetch) 		r_state_shadow <= `STATE_FETCH;
+							else if(w_waitToLwst_to_calc)		r_state_shadow <= `STATE_CALC;
+							else if(w_waitToLwst_to_lwst)		r_state_shadow <= `STATE_LWST;
+							else if(w_______to_fetch)		r_state_shadow <= `STATE_FETCH;
 			endcase
 		end
 	end
@@ -172,8 +212,8 @@ module mCpu_ctrl (
 	assign	w_waitToLwst_to_lwst		= ((r_write_mem_complete_next == 1'b1) || (r_read_mem_complete_next == 1'b1)) && ((i_empty == 1'b0) && (w_lwst == 1'b1));
 
 
-	assign	o_calc_start = (r_state == `STATE_CALC)? 1'b1 : 1'b0;
-	assign	o_lwst_start = (r_state == `STATE_LWST)? 1'b1 : 1'b0;
+	assign	o_calc_start = (w_state == `STATE_CALC)? 1'b1 : 1'b0;
+	assign	o_lwst_start = (w_state == `STATE_LWST)? 1'b1 : 1'b0;
 
 	reg	r_write_mem_complete_next;	
 	reg	r_read_mem_complete_next;	
@@ -213,7 +253,7 @@ module mCpu_ctrl (
 			r_permit_fetch_count <= 0;
 		//end else if ((w_ready_to_fetch || w_waitToCalc_to_fetch) || (w_waitToFetch_to_fetch || w_waitToLwst_to_fetch)) begin
 		//	r_calc_complete_next <= 0;
-		end else if (r_state == `STATE_FETCH) begin
+		end else if (w_state == `STATE_FETCH) begin
 			r_permit_fetch_count <= r_permit_fetch_count + 1;
 		end else begin
 			r_permit_fetch_count <= 0;
@@ -232,7 +272,7 @@ module mCpu_ctrl (
 	//assign	w_be	= (((w_op==`OP_BE)&&(i_src0==i_src1)))? 1'b1 : 1'b0;
 	//assign	w_bne	= (((w_op==`OP_BNE)&&(i_src0!=i_src1)))? 1'b1 : 1'b0;
 	assign	o_be_bne = (w_be || w_bne)? 1'b1 : 1'b0;
-	assign	o_permit_fetch	= (r_state == `STATE_FETCH) ? 1'b1 : 1'b0;
+	assign	o_permit_fetch	= (w_state == `STATE_FETCH) ? 1'b1 : 1'b0;
 	//assign	o_jump_enable = (((i_inst_valid == 1) && (w_type == `TYPE_J)) && ((r_calc_complete_next == 1)||(r_write_mem_complete_next==1||r_read_mem_complete_next==1) && (i_empty == 0)))? 1 : 0;
 endmodule
 `endif

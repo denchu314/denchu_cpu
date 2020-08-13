@@ -54,6 +54,9 @@ module mInst_fetch_ctrl #(
 	
 	output				o_fetch_complete,
 
+	input				i_shadow_switch,
+	input	[`WORD_BITS-1:0]	i_intr_addr,
+	
 	input				clk,
 	input				rst
 
@@ -72,7 +75,8 @@ module mInst_fetch_ctrl #(
 	assign	o_ret_addr_valid	= w_jal_valid;
 	
 
-	reg	[`MEM_ADDR_BITS-1:0] 	r_program_counter;
+	reg	[`MEM_ADDR_BITS-1:0] 	r_program_counter_front;
+	reg	[`MEM_ADDR_BITS-1:0] 	r_program_counter_shadow;
 	wire	w_be_bne_valid;
 	wire	w_jr_valid;
 	wire	w_j_valid;
@@ -87,25 +91,45 @@ module mInst_fetch_ctrl #(
 	assign	w_j_valid	= i_j_valid 	;
 	assign	w_jal_valid 	= i_jal_valid 	;
 
-	// program_counter
+	// program_counter front
 	always @(posedge clk)
 	begin
 		if(rst) begin
-			r_program_counter <= 0;
-		end else if (w_jr_valid) begin
-			r_program_counter <= i_jr_addr;
-		end else if (w_j_valid) begin
-			r_program_counter <= i_j_addr;
-		end else if (w_jal_valid) begin
-			r_program_counter <= i_jal_addr;
-		end else if (w_be_bne_valid) begin
-			r_program_counter <= r_program_counter + i_be_bne_addr + (`WORD_BITS / `BITS_PER_BYTE);
-		end else if (i_permit_fetch) begin
-			r_program_counter <= r_program_counter + (`WORD_BITS / `BITS_PER_BYTE);
+			r_program_counter_front <= 0;
+		end else if (w_jr_valid 	& !i_shadow_switch) begin
+			r_program_counter_front <= i_jr_addr;
+		end else if (w_j_valid 		& !i_shadow_switch) begin
+			r_program_counter_front <= i_j_addr;
+		end else if (w_jal_valid 	& !i_shadow_switch) begin
+			r_program_counter_front <= i_jal_addr;
+		end else if (w_be_bne_valid 	& !i_shadow_switch) begin
+			r_program_counter_front <= r_program_counter_front + i_be_bne_addr + (`WORD_BITS / `BITS_PER_BYTE);
+		end else if (i_permit_fetch 	& !i_shadow_switch) begin
+			r_program_counter_front <= r_program_counter_front + (`WORD_BITS / `BITS_PER_BYTE);
 		end
 	end
 	
-	assign	o_ret_addr	= r_program_counter;
+	// program_counter shadow
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_program_counter_shadow <= 0;
+		end else if (w_jr_valid		& i_shadow_switch) begin
+			r_program_counter_shadow <= i_jr_addr;
+		end else if (w_j_valid		& i_shadow_switch) begin
+			r_program_counter_shadow <= i_j_addr;
+		end else if (w_jal_valid	& i_shadow_switch) begin
+			r_program_counter_shadow <= i_jal_addr;
+		end else if (w_be_bne_valid	& i_shadow_switch) begin
+			r_program_counter_shadow <= r_program_counter_shadow + i_be_bne_addr + (`WORD_BITS / `BITS_PER_BYTE);
+		end else if (i_permit_fetch	& i_shadow_switch) begin
+			r_program_counter_shadow <= r_program_counter_shadow + (`WORD_BITS / `BITS_PER_BYTE);
+		end
+	end
+	
+	wire	[`MEM_ADDR_BITS-1:0]	w_program_counter;
+	assign				w_program_counter	= (i_shadow_switch)? r_program_counter_shadow : r_program_counter_front;
+	assign				o_ret_addr 		= w_program_counter;
 
 
 	// inst counter
@@ -139,6 +163,7 @@ module mInst_fetch_ctrl #(
 	wire	[`MEM_ADDR_BITS-1:0]	w_readinst_fifo_in_data;
 	wire				w_readinst_fifo_in_valid;
 
+
 	mArb5 #(
 		.p_st_bits	(`MEM_ADDR_BITS)
 	) uArb5	(
@@ -148,10 +173,10 @@ module mInst_fetch_ctrl #(
 		.iSnk1Valid	(w_j_valid & i_permit_fetch),
 		.iSnk2Data	(i_jal_addr),
 		.iSnk2Valid	(w_jal_valid & i_permit_fetch),
-		.iSnk3Data	(r_program_counter),
+		.iSnk3Data	(w_program_counter),
 		.iSnk3Valid	(i_permit_fetch),
 		//.iSnk3Valid	(o_inst_empty & i_permit_fetch),
-		.iSnk4Data	(r_program_counter+i_be_bne_addr+(`WORD_BITS>>3)),
+		.iSnk4Data	(w_program_counter+i_be_bne_addr+(`WORD_BITS>>3)),
 		.iSnk4Valid	(w_be_bne_valid & i_permit_fetch),
 		
 		.oSrc0Data	(w_readinst_fifo_in_data),
@@ -165,18 +190,44 @@ module mInst_fetch_ctrl #(
 		.p_st_bits		(`MEM_ADDR_BITS),
 		.p_fifo_length 		(8),
 		.p_fifo_length_log2 	(3)
-	) uReadinst (
+	) uReadinst_front (
 		.i_snk_data		(w_readinst_fifo_in_data),
-		.i_snk_valid		(w_readinst_fifo_in_valid),
+		.i_snk_valid		(w_readinst_fifo_in_valid & !i_shadow_switch),
 		.o_snk_ready		(),
 		
-		.o_src_data		(o_addr),
-		.o_src_valid		(o_read),
-		.i_src_ready		(!i_waitrequest),
+		.o_src_data		(w_addr_front),
+		.o_src_valid		(w_read_front),
+		.i_src_ready		(!i_waitrequest & !i_shadow_switch),
 
 		.clk			(clk),
 		.rst			(rst | o_rst_inst_fifo)
 	);
+
+	mFifo #(
+		.p_st_bits		(`MEM_ADDR_BITS),
+		.p_fifo_length 		(8),
+		.p_fifo_length_log2 	(3)
+	) uReadinst_shadow (
+		.i_snk_data		(w_readinst_fifo_in_data),
+		.i_snk_valid		(w_readinst_fifo_in_valid & i_shadow_switch),
+		.o_snk_ready		(),
+		
+		.o_src_data		(w_addr_shadow),
+		.o_src_valid		(w_read_shadow),
+		.i_src_ready		(!i_waitrequest & i_shadow_switch),
+
+		.clk			(clk),
+		.rst			(rst | o_rst_inst_fifo)
+	);
+
+	wire	[`MEM_ADDR_BITS-1:0]	w_addr_front;
+	wire				w_read_front;
+
+	wire	[`MEM_ADDR_BITS-1:0]	w_addr_shadow;
+	wire				w_read_shadow;
+
+	assign	o_addr	= (i_shadow_switch)? w_addr_shadow : w_addr_front;
+	assign	o_read	= (i_shadow_switch)? w_read_shadow : w_read_front;
 
 	reg	[7:0]	reading_inst_counter;
 	always @(posedge clk)
@@ -212,23 +263,48 @@ module mInst_fetch_ctrl #(
 	end
 	
 	assign	w_readdata_fifo_reset = r_flash_flag;
+
+	wire	[`WORD_BITS-1:0]	w_inst_front;
+	wire				w_inst_valid_front;
+	wire	[`WORD_BITS-1:0]	w_inst_shadow;
+	wire				w_inst_valid_shadow;
+
 	mFifo #(
 		.p_st_bits		(`WORD_BITS),
 		.p_fifo_length 		(8),
 		.p_fifo_length_log2 	(3)
-	) uReaddata (
+	) uReaddata_front (
 		.i_snk_data		(i_readdata),
-		.i_snk_valid		(i_readdatavalid),
+		.i_snk_valid		(i_readdatavalid & !i_shadow_switch),
 		.o_snk_ready		(),
 		
-		.o_src_data		(o_inst),
-		.o_src_valid		(o_inst_valid),
-		.i_src_ready		(1'b1),
+		.o_src_data		(w_inst_front),
+		.o_src_valid		(w_inst_valid_front),
+		.i_src_ready		(1'b1 & !i_shadow_switch),
 
 		.clk			(clk),
 		.rst			(rst | (o_rst_inst_fifo | r_flash_flag))
 	);
 
+	mFifo #(
+		.p_st_bits		(`WORD_BITS),
+		.p_fifo_length 		(8),
+		.p_fifo_length_log2 	(3)
+	) uReaddata_shadow (
+		.i_snk_data		(i_readdata),
+		.i_snk_valid		(i_readdatavalid & i_shadow_switch),
+		.o_snk_ready		(),
+		
+		.o_src_data		(w_inst_shadow),
+		.o_src_valid		(w_inst_valid_shadow),
+		.i_src_ready		(1'b1 & i_shadow_switch),
+
+		.clk			(clk),
+		.rst			(rst | (o_rst_inst_fifo | r_flash_flag))
+	);
+
+	assign o_inst		= (i_shadow_switch)? w_inst_shadow 		: w_inst_front;
+	assign o_inst_valid	= (i_shadow_switch)? w_inst_valid_shadow 	: w_inst_valid_front;
 		
 endmodule
 

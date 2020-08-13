@@ -32,6 +32,8 @@ module mMM_to_ST_arb #(
 	input	[p_st_bits-1:0]		i_readdata,
 	input				i_readdatavalid,
 	input				i_waitrequest,
+		
+	input				i_shadow_switch,
 
 	input			clk,
 	input			rst
@@ -59,20 +61,51 @@ module mMM_to_ST_arb #(
 		.p_fifo_length_log2 	(p_fifo_length_log2)
 	) uInstFifo (
 		.i_snk_data		(w_inst_fifo_in),
-		.i_snk_valid		(i_lwst_start & (i_read_req | i_write_req)),
+		.i_snk_valid		(i_lwst_start & (i_read_req | i_write_req) & !i_shadow_switch),
 		.o_snk_ready		(),
 		
-		.o_src_data		(w_inst_fifo_out),
-		.o_src_valid		(w_inst_fifo_valid_out),
-		.i_src_ready		(!i_waitrequest),
+		.o_src_data		(w_inst_fifo_front_out),
+		.o_src_valid		(w_inst_fifo_front_valid_out),
+		.i_src_ready		(!i_waitrequest & !i_shadow_switch),
 
 		.clk			(clk),
 		.rst			(rst)
 
 	);
 	
+	mFifo #(
+		.p_st_bits		(p_st_bits+p_addr_bits+2),
+		.p_fifo_length 		(p_fifo_length),
+		.p_fifo_length_log2 	(p_fifo_length_log2)
+	) uInstFifo_shadow (
+		.i_snk_data		(w_inst_fifo_in),
+		.i_snk_valid		(i_lwst_start & (i_read_req | i_write_req) & i_shadow_switch),
+		.o_snk_ready		(),
+		
+		.o_src_data		(w_inst_fifo_shadow_out),
+		.o_src_valid		(w_inst_fifo_valid_shadow_out),
+		.i_src_ready		(!i_waitrequest & i_shadow_switch),
+
+		.clk			(clk),
+		.rst			(rst)
+
+	);
+
+	wire	w_inst_fifo_front_valid_out;
+	wire	[p_st_bits+p_addr_bits+2-1:0]	w_inst_fifo_front_out;
+	
+	wire	w_inst_fifo_shadow_valid_out;
+	wire	[p_st_bits+p_addr_bits+2-1:0]	w_inst_fifo_shadow_out;
+	
 	wire	w_inst_fifo_valid_out;
 	wire	[p_st_bits+p_addr_bits+2-1:0]	w_inst_fifo_out;
+	
+	assign	w_inst_fifo_out		= (i_shadow_switch)? 	w_inst_fifo_shadow_out:
+								w_inst_fifo_front_out;	
+	assign	w_inst_fifo_valid_out	= (i_shadow_switch)? 	w_inst_fifo_shadow_valid_out:
+	       							w_inst_fifo_front_valid_out;
+
+
 	assign	o_writedata 	= w_inst_fifo_out[p_st_bits+p_addr_bits+2-1:p_addr_bits+2];
 	assign	o_addr		= w_inst_fifo_out[p_addr_bits+2-1:2];
 	assign	o_read		= (w_inst_fifo_valid_out == 1'b1)? w_inst_fifo_out[1] : 1'b0;
@@ -81,24 +114,50 @@ module mMM_to_ST_arb #(
 	assign o_write_mem_complete = o_write & !i_waitrequest & !rst;
 	assign o_read_mem_complete = i_readdatavalid & !i_waitrequest & !rst;
 
+	wire	[p_st_bits-1:0]	w_readdata_front;
+	wire			w_valid_front;
+	
+	wire	[p_st_bits-1:0]	w_readdata_shadow;
+	wire			w_valid_shadow;
+
 	mFifo #(
 		.p_st_bits		(p_st_bits),
 		.p_fifo_length 		(p_fifo_length),
 		.p_fifo_length_log2 	(p_fifo_length_log2)
 	) uReaddata (
 		.i_snk_data		(i_readdata),
-		.i_snk_valid		(i_readdatavalid),
+		.i_snk_valid		(i_readdatavalid & !i_shadow_switch),
 		.o_snk_ready		(),
 		
-		.o_src_data		(o_readdata),
-		.o_src_valid		(o_valid),
-		.i_src_ready		(1'b1),
+		.o_src_data		(w_readdata_front),
+		.o_src_valid		(w_valid_front),
+		.i_src_ready		(1'b1 & !i_shadow_switch),
 
 		.clk			(clk),
 		.rst			(rst)
 
 	);
 	
+	mFifo #(
+		.p_st_bits		(p_st_bits),
+		.p_fifo_length 		(p_fifo_length),
+		.p_fifo_length_log2 	(p_fifo_length_log2)
+	) uReaddata_shadow (
+		.i_snk_data		(i_readdata),
+		.i_snk_valid		(i_readdatavalid & i_shadow_switch),
+		.o_snk_ready		(),
+		
+		.o_src_data		(w_readdata_shadow),
+		.o_src_valid		(w_valid_shadow),
+		.i_src_ready		(1'b1 & i_shadow_switch),
+
+		.clk			(clk),
+		.rst			(rst)
+
+	);
+
+	assign	o_readdata 	= (i_shadow_switch)? w_readdata_shadow 	: w_readdata_front;
+	assign	o_valid		= (i_shadow_switch)? w_valid_shadow 	: w_valid_front;
 	
 endmodule
 

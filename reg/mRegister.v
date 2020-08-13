@@ -18,24 +18,40 @@ module mRegister (
 	output	[`WORD_BITS-1:0]	oSrc0Val,
 	
 	output	[`WORD_BITS-1:0]	oSrc1Val,
+		
+	input				iShadowSwitch,
 	
 	input	rst,
 	input	clk
 ); 
 
-	reg	[`NUM_OF_REG-1:0]	rRegisters [`WORD_BITS-1:0];
-	
+	reg	[`NUM_OF_REG-1:0]	rRegisters 		[`WORD_BITS-1:0];
+	reg	[`NUM_OF_REG-1:0]	rRegisters_shadow 	[`WORD_BITS-1:0];
+
+	// front register	
 	always @ (posedge clk)
 	begin 
 		if (rst) begin
 			//atodekaku
-		end else if (iDstValid) begin
-			rRegisters[iDstAddr]	<=	iDstVal;
+		end else if (iDstValid & !iShadowSwitch) begin
+			rRegisters[iDstAddr]		<=	iDstVal;
 		end
 	end
 
-	assign	oSrc0Val	=	(iSrc0Addr == 0)? `WORD_BITS'b0 : rRegisters[iSrc0Addr];
-	assign	oSrc1Val	=	(iSrc1Addr == 0)? `WORD_BITS'b0 : rRegisters[iSrc1Addr];
+	// shadow register
+	always @ (posedge clk)
+	begin 
+		if (rst) begin
+			//atodekaku
+		end else if (iDstValid & iShadowSwitch) begin
+			rRegisters_shadow[iDstAddr]	<=	iDstVal;
+		end
+	end
+
+	assign	oSrc0Val	=	(iShadowSwitch)?	((iSrc0Addr == 0)? `WORD_BITS'b0 : rRegisters_shadow[iSrc0Addr]) :
+								((iSrc0Addr == 0)? `WORD_BITS'b0 : rRegisters[iSrc0Addr]);
+	assign	oSrc1Val	=	(iShadowSwitch)?	((iSrc1Addr == 0)? `WORD_BITS'b0 : rRegisters_shadow[iSrc1Addr]) :
+								((iSrc1Addr == 0)? `WORD_BITS'b0 : rRegisters[iSrc1Addr]);
 
 endmodule
 

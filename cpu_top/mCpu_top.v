@@ -27,6 +27,7 @@
 `include	"./mMux.v"
 `include	"./mRegister.v"
 `include	"./mFifo.v"
+`include	"./mAddress_decoder.v"
 
 
 module mCpu_top (
@@ -56,6 +57,11 @@ module mCpu_top (
 	input				i_status_write,
 	
 	input				i_boot_sw,
+
+	input				i_h_intr;
+	input				i_s_intr;
+	input	[`EXCEPTION_CODE_HARD_BITS-1:0]		i_h_intr_code;
+	input	[`EXCEPTION_CODE_SOFT_BITS-1:0]		i_s_intr_code;
 
 	input				clk,
 	input				rst
@@ -103,6 +109,8 @@ module mCpu_top (
 		.oSrc0Val		(w_reg_src0),
 		.oSrc1Val		(w_reg_src1),
 		
+		.iShadowSwitch		(r_intring),
+
 		.rst			(rst),
 		.clk			(clk)
 	);
@@ -199,6 +207,8 @@ module mCpu_top (
 		.i_write		(i_status_write),
 
 		.o_permit_fetch		(w_cpu_ctrl_permit_fetch),
+		
+		.i_shadow_switch	(r_intring),
 
 		.clk			(clk),
 		.rst			(rst)
@@ -212,6 +222,13 @@ module mCpu_top (
 	wire				w_inst_fetch_ctrl_inst_valid;
 	wire				w_inst_fetch_ctrl_rst_fifo;
 	//wire				w_jump_enable_cpu_ctrl;
+	wire	[`WORD_BITS-1:0]	w_intr_addr;
+
+	mAddress_decoder uAddress_decoder(
+		.i_h_intr_code(r_h_intr_code),
+		.i_s_intr_code(r_s_intr_code),
+		.o_intr_address(w_intr_addr)
+	);
 
 	mInst_fetch_ctrl #(
 		.p_fifo_length 		(8),
@@ -251,7 +268,10 @@ module mCpu_top (
 
 		.i_permit_fetch		(w_cpu_ctrl_permit_fetch),
 		.o_fetch_complete	(w_inst_fetch_ctrl_fetch_complete),
-	
+		
+		.i_shadow_switch	(r_intring),
+		.i_intr_addr		(w_intr_addr),
+
 		.clk			(clk),
 		.rst			(rst)
 	);
@@ -290,10 +310,18 @@ module mCpu_top (
 		.i_readdata		(i_data_readdata),
 		.i_readdatavalid	(i_data_readdatavalid),
 		.i_waitrequest		(i_data_waitrequest),
+		
+		.i_shadow_switch	(r_intring),
 
 		.clk			(clk),
 		.rst			(rst)
 	);
+
+	wire	[`WORD_BITS-1:0]	w_fifo_inst_front;	
+	wire				w_fifo_inst_front_valid;	
+
+	wire	[`WORD_BITS-1:0]	w_fifo_inst_shadow;	
+	wire				w_fifo_inst_shadow_valid;	
 
 	wire	[`WORD_BITS-1:0]	w_fifo_inst;	
 	wire				w_fifo_inst_valid;	
@@ -302,18 +330,99 @@ module mCpu_top (
 		.p_st_bits		(`WORD_BITS),
 		.p_fifo_length 		(8),
 		.p_fifo_length_log2 	(3)
-	) uFifo (
+	) uFifo_front (
 		.i_snk_data		(w_inst_fetch_ctrl_inst),
-		.i_snk_valid		(w_inst_fetch_ctrl_inst_valid),
+		.i_snk_valid		(w_inst_fetch_ctrl_inst_valid & !r_intring),
 		.o_snk_ready		(),
 		
-		.o_src_data		(w_fifo_inst),
-		.o_src_valid		(w_fifo_inst_valid),
-		.i_src_ready		(w_cpu_ctrl_inst_complete),
-
+		.o_src_data		(w_fifo_inst_front),
+		.o_src_valid		(w_fifo_inst_front_valid),
+		.i_src_ready		(w_cpu_ctrl_inst_complete & !r_intring),
+		
 		.clk			(clk),
 		.rst			(rst | w_inst_fetch_ctrl_rst_fifo)
 
 	);
+	
+	mFifo #(
+		.p_st_bits		(`WORD_BITS),
+		.p_fifo_length 		(8),
+		.p_fifo_length_log2 	(3)
+	) uFifo_shadow (
+		.i_snk_data		(w_inst_fetch_ctrl_inst),
+		.i_snk_valid		(w_inst_fetch_ctrl_inst_valid & r_intring),
+		.o_snk_ready		(),
+		
+		.o_src_data		(w_fifo_inst_shadow),
+		.o_src_valid		(w_fifo_inst_shadow_valid),
+		.i_src_ready		(w_cpu_ctrl_inst_complete & r_intring),
+		
+		.clk			(clk),
+		.rst			(rst | w_inst_fetch_ctrl_rst_fifo)
+
+	);
+
+	assign	w_fifo_inst		= (r_intring)? w_fifo_inst_shadow 	: w_fifo_inst_front;
+	assign	w_fifo_inst_valid	= (r_intring)? w_fifo_inst_shadow_valid : w_fifo_inst_front_valid;
+
+	reg					r_intring;
+	reg					r_intr_forbid;
+	reg	[`EXCEPTION_CODE_HARD_BITS-1:0]	r_h_intr_code;
+	reg	[`EXCEPTION_CODE_SOFT_BITS-1:0]	r_s_intr_code;
+
+
+	wire					w_h_intr;
+	
+	wire					w_s_intr;
+	
+	wire					w_intr_finish;
+
+	//intr code hard
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_h_intr_code <= `EXCEPTION_CODE_HARD_NONE;
+		end else if(w_h_intr & !(r_intr_forbid==`INTR_FORBID)) begin
+			r_h_intr_code <= i_h_intr_code;
+		end else if(w_intr_finish) begin
+			r_h_intr_code <= `EXCEPTION_CODE_HARD_NONE;
+		end
+	end
+	
+	//intr code soft
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_s_intr_code <= `EXCEPTION_CODE_SOFT_NONE;
+		end else if(w_s_intr & !(r_intr_forbid==`INTR_FORBID)) begin
+			r_s_intr_code <= i_s_intr_code;
+		end else if(w_intr_finish) begin
+			r_s_intr_code <= `EXCEPTION_CODE_SOFT_NONE;
+		end
+	end
+
+	//intr forbid
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_intr_forbid <= !(`INTR_FORBID);
+		end else if(w_h_intr | w_s_intr) begin
+			r_intr_forbid <= `INTR_FORBID;
+		end else if(w_intr_finish) begin
+			r_intr_forbid <= !(`INTR_FORBID);
+		end
+	end
+	
+	//intring
+	always @(posedge clk)
+	begin
+		if(rst) begin
+			r_intring <= !(`INTRING);
+		end else if(w_h_intr | w_s_intr) begin
+			r_intring <= `INTRING;
+		end else if(w_intr_finish) begin
+			r_intring <= !(`INTRING);
+		end
+	end
 
 endmodule
