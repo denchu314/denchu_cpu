@@ -58,10 +58,10 @@ module mCpu_top (
 	
 	input				i_boot_sw,
 
-	input				i_h_intr;
-	input				i_s_intr;
-	input	[`EXCEPTION_CODE_HARD_BITS-1:0]		i_h_intr_code;
-	input	[`EXCEPTION_CODE_SOFT_BITS-1:0]		i_s_intr_code;
+	input				i_h_intr,
+	input				i_s_intr,
+	input	[`EXCEPTION_CODE_HARD_BITS-1:0]		i_h_intr_code,
+	input	[`EXCEPTION_CODE_SOFT_BITS-1:0]		i_s_intr_code,
 
 	input				clk,
 	input				rst
